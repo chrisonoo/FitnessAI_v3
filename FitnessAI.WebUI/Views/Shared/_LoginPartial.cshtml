@@ -1,0 +1,30 @@
+﻿@using FitnessAI.Domain.Entities
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IViewLocalizer ViewLocalizer
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-action="Dashboard" asp-controller="Client" title="Moje konto">
+                <i class="fas fa-solid fa-user"></i>@ViewLocalizer["MyAccount"]
+            </a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">
+                <i class="fas fa-solid fa-user-plus"></i>@ViewLocalizer["Registration"]
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">
+                <i class="fas fa-solid fa-right-to-bracket"></i>@ViewLocalizer["Login"]
+            </a>
+        </li>
+    }
+</ul>

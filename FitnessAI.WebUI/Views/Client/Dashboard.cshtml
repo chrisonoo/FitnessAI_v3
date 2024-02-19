@@ -1,0 +1,117 @@
+﻿@model FitnessAI.Application.Clients.Queries.GetClientDashboard.GetClientDashboardVm
+
+@{
+    ViewData["Title"] = "Pulpit";
+    ViewBag.Email = Model.Email;
+}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Witaj @ViewBag.Email</h6>
+                </div>
+
+                <div class="card-body">
+
+                    @if (Model.TicketEndDate.HasValue)
+                    {
+                        <h4 class="my-3">Masz <span class="text-success">aktywny</span> karnet (data wygaśnięcia: @Model.TicketEndDate.Value.ToLongDateString())</h4>
+                    }
+                    else
+                    {
+                        <h4 class="my-3">Twój karnet jest <span class="text-danger">nieaktywny</span></h4>
+                    }
+
+                    <h6 class="announcements-header">Najnowsze ogłoszenia:</h6>
+
+                    <ul class="announcements-position no-decoration">
+
+                        @foreach (var announcement in Model.Announcements.Items)
+                        {
+                            <li class="mb-2">
+                                @announcement.Date.ToLongDateString() <span>-</span> @announcement.Description
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Ilość Twoich treningów:</h6>
+                </div>
+                <div class="card-body">
+                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%"></canvas>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Najpopularniejsze treningi:</h6>
+                </div>
+                <div class="card-body">
+                    <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/Chart.js/chart.min.js"></script>
+
+    <script>
+        const ctxBar = document.getElementById('barChart').getContext('2d');
+        const barChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: JSON.parse('@Html.Raw(Json.Serialize(Model.TrainingCountChart.Positions.Select(x => x.Label)))'),
+                datasets: [{
+                    label: '@Html.Raw(Model.TrainingCountChart.Label)',
+                    data: JSON.parse('@Html.Raw(Json.Serialize(Model.TrainingCountChart.Positions.Select(x => x.Data)))'),
+                    backgroundColor: JSON.parse('@Html.Raw(Json.Serialize(Model.TrainingCountChart.Positions.Select(x => x.Color)))'),
+                    borderColor: JSON.parse('@Html.Raw(Json.Serialize(Model.TrainingCountChart.Positions.Select(x => x.BorderColor)))'),
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+
+        const ctxPie = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: JSON.parse('@Html.Raw(Json.Serialize(Model.TheBestTrainingsChart.Positions.Select(x => x.Label)))'),
+                datasets: [{
+                    data: JSON.parse('@Html.Raw(Json.Serialize(Model.TheBestTrainingsChart.Positions.Select(x => x.Data)))'),
+                    backgroundColor: JSON.parse('@Html.Raw(Json.Serialize(Model.TheBestTrainingsChart.Positions.Select(x => x.Color)))'),
+                    borderColor: JSON.parse('@Html.Raw(Json.Serialize(Model.TheBestTrainingsChart.Positions.Select(x => x.BorderColor)))'),
+                    borderWidth: 1,
+                    hoverOffset: 4
+                }]
+            }            
+        });
+
+
+    </script>
+
+
+}

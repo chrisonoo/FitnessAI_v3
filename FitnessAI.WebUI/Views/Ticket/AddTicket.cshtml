@@ -1,0 +1,122 @@
+﻿@inject IViewLocalizer ViewLocalizer
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Globalization
+@model FitnessAI.Application.Tickets.Queries.GetAddTicket.AddTicketVm
+
+@{
+    ViewData["Title"] = ViewLocalizer["AddTicketTitle"];
+    var locale = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+@section Styles {
+    <partial name="Styles/_DateTimeStyles"/>
+    <partial name="Styles/_SelectStyles"/>
+}
+
+<div class="card card-primary card-border-top">
+
+    @using (Html.BeginForm("AddTicket", "Ticket"))
+    {
+        @Html.AntiForgeryToken()
+
+        // Przechowuje dane w widoku, które przekazaliśmy mu z kontrolera
+        @for (var i = 0; i < Model.AvailableTicketTypes.Count(); i++)
+        {
+            @Html.HiddenFor(model => Model.AvailableTicketTypes[i].Id)
+            @Html.HiddenFor(model => Model.AvailableTicketTypes[i].Name)
+            @Html.HiddenFor(model => Model.AvailableTicketTypes[i].Price)
+        }
+
+        <div class="card-body">
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Ticket.StartDate)
+
+                <div class="input-group date" id="dtpStartDate" data-target-input="nearest">
+                    <input asp-for="Ticket.StartDate" type="text" class="form-control datetimepicker-input" data-target="#dtpStartDate"/>
+                    <div class="input-group-append" data-target="#dtpStartDate" data-toggle="datetimepicker">
+                        <div class="input-group-text calendar">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.ValidationMessageFor(x => x.Ticket.StartDate)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Ticket.TicketTypeId)
+
+                <div class="select2-blue">
+
+                    @Html.DropDownList("Ticket.TicketTypeId", Model.AvailableTicketTypes.Select(x => new SelectListItem(x.Name, x.Id.ToString())), null, new { @class = "form-control select2-TicketTypeId", style = "width: 100%;" })
+                    @Html.ValidationMessageFor(x => x.Ticket.TicketTypeId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Ticket.Price)
+                @Html.TextBoxFor(x => x.Ticket.Price, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(x => x.Ticket.Price)
+            </div>
+
+            <img class="mt-5 mb-1" src="~/images/Przelewy24_logo.png" alt="" width="200">
+
+        </div>
+
+        <div class="card-footer">
+
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fas fa-solid fa-cart-shopping"></i>@ViewLocalizer["GoToPayment"]
+            </button>
+
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    <partial name="Scripts/_ValidationScriptsPartial"/>
+    <partial name="Scripts/_DateTimeScripts"/>
+    <partial name="Scripts/_SelectScripts"/>
+
+    <script>
+
+    $(document).ready(function () {
+
+        $('#dtpStartDate').datetimepicker({
+            format: 'L',
+            locale: '@locale'
+        });
+
+        $('.select2-TicketTypeId').select2({
+            theme: 'bootstrap-5'
+        });
+
+        $('#Ticket_TicketTypeId').change(function () {
+            updatePrice(this.value);
+        });
+
+    });
+
+    $(document).on("globalizeHasBeenLoadedEvent",
+        function () {
+            updatePrice($('#Ticket_TicketTypeId').val());
+        });
+
+    var availableTickets = @Html.Raw(Json.Serialize(Model.AvailableTicketTypes));
+
+    function updatePrice(val) {
+        var price = availableTickets.find(element => element.id == val).price;
+
+        var formatter = Globalize.numberFormatter();
+        price = formatter(price);
+
+        $('#Ticket_Price').val(price);
+    }
+
+</script>
+
+}

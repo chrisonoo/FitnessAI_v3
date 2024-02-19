@@ -1,0 +1,29 @@
+/* Ikony w menu bocznym */
+
+a>i.fas{
+    width: 24px;
+    text-align: center;
+}
+
+/* Walidacje formularzy */
+
+.field-validation-error span{
+    color: #d50808;
+    font-size: 0.75rem;
+}
+
+/* Formularz do edycji Moje dane, Klient, Pracownik */
+
+.card-body label, .modal-body label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.card-body .form-group:not(:first-child), .modal-body .form-group {
+    margin-top: 1rem;
+}
+
+.card-body .form-check, .modal-body .form-check {
+    margin-top: 1.5rem;
+}

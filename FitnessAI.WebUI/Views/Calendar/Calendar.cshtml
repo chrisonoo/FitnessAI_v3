@@ -1,0 +1,257 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Globalization
+@model IEnumerable<FitnessAI.Application.Employees.Queries.GetEmployeeBasics.EmployeeBasicsDto>
+@{
+    ViewData["Title"] = "Grafik";
+    var locale = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/fullcalendar/main.min.css"/>
+    <partial name="Styles/_DateTimeStyles"/>
+    <partial name="Styles/_SelectStyles"/>
+}
+
+<partial name="Modals/_ModalEvent" model="@Model"/>
+
+<div class="card card-primary card-border-top">
+
+    <partial name="_Overlay"/>
+
+    <div class="card-body">
+
+        <div id="calendar"></div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/lib/fullcalendar/main.min.js"></script>
+    <script src="~/lib/fullcalendar/locales/pl.min.js"></script>
+    <partial name="Scripts/_DateTimeScripts"/>
+    <partial name="Scripts/_SelectScripts"/>
+
+    <script>
+
+    var events = [];
+
+    $(document).ready(function() {
+
+        $('.loading-overlay').show();
+
+        $('#dtpStart').datetimepicker({
+            icons: { time: 'far fa-clock'},
+            locale: '@locale'
+        });
+
+        $('#dtpEnd').datetimepicker({
+            icons: { time: 'far fa-clock'},
+            locale: '@locale'
+        });
+
+        $('.select2-UserId').select2({
+            theme: 'bootstrap-5'
+        });
+
+        createCalendar();
+
+        $('#IsFullDay').click(function () {
+
+            $('#IsFullDay').is(':checked') ? $("#divEndDate").hide() : $("#divEndDate").show();
+
+        });
+
+    });
+
+    function createCalendar() {
+
+        events = [];
+
+        $.ajax({
+            type: "GET",
+            url: "/Calendar/GetEmployeeEvents",
+            success: function (data) {
+                
+                $.each(data, function (i, v) {
+
+                    events.push({
+                        title: v.title,
+                        start: v.start,
+                        end: v.end,
+                        color: v.themeColor,
+                        allDay: v.isFullDay,
+                        id: v.id,
+                        userId: v.userId
+                    });
+
+                });
+
+                renderEvents(events);
+
+                $('.loading-overlay').hide();
+            },
+            error: function (data) {
+                toastr.error('Błąd. Nie udało się wygenerować kalendarza. Spróbuj ponownie lub skontaktuj się z administratorem.');
+                $('.loading-overlay').hide();
+            },
+            dataType: "json"
+        });
+
+    }
+
+    function renderEvents(events) {
+
+        var calendarEl = document.getElementById("calendar");
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth', 
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
+            contentHeight: 600,
+            initialDate: new Date(),
+            navLinks: true,
+            businessHours: true,
+            events: events,
+            locale: '@locale'
+        });
+
+        calendar.on('dateClick', function(info) {
+
+            $("#modal-delete").hide();
+            $("#divEndDate").show();
+            $("#Id").val(0);
+            $("#dtpStart").datetimepicker('date', moment(info.date));
+            $("#dtpEnd").datetimepicker('date', moment(info.date).add(8, 'hours'));
+            $("#IsFullDay").prop('checked', false);
+            $("#UserId").val('@Model.First().Id').change();
+
+            $('.modal-title').text("Dodaj zdarzenie");
+            $('#modal-calendar').modal('show');
+        });
+
+        calendar.on('eventClick', function(info) {
+
+            $("#modal-delete").show();            
+            $("#Id").val(info.event.id);
+            $("#dtpStart").datetimepicker('date', moment(info.event.start));
+            $("#dtpEnd").datetimepicker('date', moment(info.event.end));
+            $("#IsFullDay").prop('checked', info.event.allDay);
+            $("#UserId").val(info.event.extendedProps.userId).change();
+
+            $('#IsFullDay').is(':checked') ? $("#divEndDate").hide() : $("#divEndDate").show();
+
+            $('.modal-title').text("Edytowanie zdarzenia");
+            $('#modal-calendar').modal('show');
+        });
+
+        calendar.render();
+
+    }
+
+    $('#calendar-form').submit(function (){
+
+        $('#modal-calendar').modal('hide');
+        $('.loading-overlay').show();
+        var model = $(this).serialize();
+        
+        $("#Id").val() == 0 ? addEvent(model) : updateEvent(model);
+        return false;
+
+    });
+
+    function addEvent(model) {
+
+        var errorMessage = "Błąd. Nie udało się zaktualizować danych na kalendarzu. Spróbuj ponownie lub skontaktuj się z administratorem.";
+
+        $.ajax({
+            type: "POST",
+            url: "/Calendar/AddEmployeeEvent",
+            data: model,
+            success: function (data) {
+                
+                if (data.success) {
+                    toastr.success('Dane zostały zaktualizowane.');
+                    createCalendar();
+                } else {
+                    toastr.error(errorMessage);
+                }
+
+                $('.loading-overlay').hide();
+            },
+            error: function (data) {
+                toastr.error(errorMessage);
+                $('.loading-overlay').hide();
+            },
+            dataType: "json"
+        });
+
+    }
+
+    function updateEvent(model) {
+
+        var errorMessage = "Błąd. Nie udało się zaktualizować danych na kalendarzu. Spróbuj ponownie lub skontaktuj się z administratorem.";
+
+        $.ajax({
+            type: "POST",
+            url: "/Calendar/UpdateEmployeeEvent",
+            data: model,
+            success: function (data) {
+                
+                if (data.success) {
+                    toastr.success('Dane zostały zaktualizowane.');
+                    createCalendar();
+                } else {
+                    toastr.error(errorMessage);
+                }
+
+                $('.loading-overlay').hide();
+            },
+            error: function (data) {
+                toastr.error(errorMessage);
+                $('.loading-overlay').hide();
+            },
+            dataType: "json"
+        });
+
+    }
+
+    function deleteEvent() {
+
+        $('#modal-calendar').modal('hide');
+
+        $('.loading-overlay').show();
+
+        var errorMessage = "Błąd. Nie udało się usunąć danych z kalendarza. Spróbuj ponownie lub skontaktuj się z administratorem.";
+
+        $.ajax({
+            type: "POST",
+            url: "/Calendar/DeleteEmployeeEvent",
+            data: {
+                id: $("#Id").val()
+            },
+            success: function (data) {
+                
+                if (data.success) {
+                    toastr.success('Dane zostały zaktualizowane.');
+                    createCalendar();
+                } else {
+                    toastr.error(errorMessage);
+                }
+
+                $('.loading-overlay').hide();
+            },
+            error: function (data) {
+                toastr.error(errorMessage);
+                $('.loading-overlay').hide();
+            },
+            dataType: "json"
+        });
+    }
+
+</script>
+
+}

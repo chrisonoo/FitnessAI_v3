@@ -1,0 +1,248 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Globalization
+@using FitnessAI.Domain.Enums
+@model FitnessAI.Application.Employees.Commands.AddEmployee.AddEmployeeCommand
+
+@{
+    ViewData["Title"] = "Dodawanie nowego pracownika";
+    var locale = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+@section Styles {
+    <partial name="Styles/_DateTimeStyles"/>
+    <partial name="Styles/_EditorStyles"/>
+    <partial name="Styles/_SelectStyles"/>
+}
+
+<partial name="Modals/_ModalChooseFile"/>
+
+<div class="card card-primary card-border-top">
+
+    @using (Html.BeginForm("AddEmployee", "Employee"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card-body">
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Wprowadź e-mail" })
+                @Html.ValidationMessageFor(x => x.Email)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Password)
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Wprowadź hasło", value = Model.Password })
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.ConfirmPassword)
+                @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Wprowadź ponownie hasło", value = Model.ConfirmPassword })
+                @Html.ValidationMessageFor(x => x.ConfirmPassword)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.FirstName)
+                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "Wprowadź imię" })
+                @Html.ValidationMessageFor(x => x.FirstName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.LastName)
+                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "Wprowadź nazwisko" })
+                @Html.ValidationMessageFor(x => x.LastName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Country)
+                @Html.TextBoxFor(x => x.Country, new { @class = "form-control", placeholder = "Wprowadź kraj zamieszkania" })
+                @Html.ValidationMessageFor(x => x.Country)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.City)
+                @Html.TextBoxFor(x => x.City, new { @class = "form-control", placeholder = "Wprowadź miejscowość zamieszkania" })
+                @Html.ValidationMessageFor(x => x.City)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.ZipCode)
+                @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control", placeholder = "Wprowadź kod pocztowy" })
+                @Html.ValidationMessageFor(x => x.ZipCode)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Street)
+                @Html.TextBoxFor(x => x.Street, new { @class = "form-control", placeholder = "Wprowadź ulicę" })
+                @Html.ValidationMessageFor(x => x.Street)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.StreetNumber)
+                @Html.TextBoxFor(x => x.StreetNumber, new { @class = "form-control", placeholder = "Wprowadź numer domu" })
+                @Html.ValidationMessageFor(x => x.StreetNumber)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.DateOfEmployment)
+
+                <div class="input-group date" id="dtpDateOfEmployment" data-target-input="nearest">
+                    <input asp-for="DateOfEmployment" type="text" class="form-control datetimepicker-input" data-target="#dtpDateOfEmployment"/>
+                    <div class="input-group-append" data-target="#dtpDateOfEmployment" data-toggle="datetimepicker">
+                        <div class="input-group-text calendar">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.ValidationMessageFor(x => x.DateOfEmployment)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Salary)
+                @Html.TextBoxFor(x => x.Salary, "{0:n2}", new { @class = "form-control", placeholder = "Wprowadź wynagrodzenie" })
+                @Html.ValidationMessageFor(x => x.Salary)
+            </div>
+
+            <div class="form-group mt-3">
+                @Html.LabelFor(x => x.ImageUrl)
+
+                <div class="input-group">
+                    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control", @readonly = "readonly", placeholder = "Wybierz zdjęcie profilowe" })
+                    <span onclick="fileBrowse('ImageUrl'); return false" class="fileBrowse input-group-text bg-primary px-3 text-white"><i class="fas fa-solid fa-file-arrow-up"></i>Wybierz plik...</span>
+                    <span onclick="clearFile('ImageUrl'); return false" class="fileBrowse input-group-text bg-danger px-3 text-white"><i class="fas fa-solid fa-file-excel"></i>Wyczyść</span>
+                </div>
+
+                @Html.ValidationMessageFor(x => x.ImageUrl)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.PositionId)
+
+                <div class="select2-blue">
+
+                    @Html.DropDownList("PositionId", Html.GetEnumSelectList<Position>(), null, new { @class = "form-control select2-PositionId", style = "width: 100%;" })
+                    @Html.ValidationMessageFor(x => x.PositionId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.WebsiteUrl)
+                @Html.TextBoxFor(x => x.WebsiteUrl, new { @class = "form-control", placeholder = "Wprowadź adres URL strony profilowej" })
+                @Html.ValidationMessageFor(x => x.WebsiteUrl)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.WebsiteRaw)
+                @Html.TextAreaFor(x => x.WebsiteRaw, new { @class = "form-control summernote", placeholder = "Wprowadź treść strony profilowej" })
+                @Html.ValidationMessageFor(x => x.WebsiteRaw)
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fas fa-solid fa-circle-check"></i>Zapisz
+            </button>
+        </div>
+    }
+
+</div>
+
+
+@section Scripts {
+
+    <partial name="Scripts/_ValidationScriptsPartial"/>
+    <partial name="Scripts/_DateTimeScripts"/>
+    <partial name="Scripts/_EditorScripts"/>
+    <partial name="Scripts/_SelectScripts"/>
+    <script src="~/lib/inputmask/jquery.inputmask.bundle.min.js"></script>
+
+    <script>
+
+        var selectedFileBrowseId;
+
+        $(document).ready(function() {
+
+            init("#WebsiteRaw");
+
+            $('#dtpDateOfEmployment').datetimepicker({
+                format: 'L',
+                locale: '@locale'
+            });
+
+            $('.select2-PositionId').select2({
+                theme: 'bootstrap-5'
+            });
+
+            $("#ZipCode").inputmask("99-999", { "clearIncomplete": true, showMaskOnHover: false });
+
+        });
+    
+        function clearFile(idName) {
+            $('#' + idName).val('');
+        }
+
+        function fileBrowse(idName) {
+            $('#modal-files').empty();
+            selectedFileBrowseId = idName;
+            $('#modal-choose-file').modal('show');
+
+            var url = '@Url.Action("GetFiles", "File")';
+
+            var errorMessage = 'Błąd. Nie udało się pobrać zdjęć. Spróbuj ponownie lub skontaktuj się z administratorem.';
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            success: function (data) {
+                if (data.success) {
+
+                    var images = data.images;
+
+                    if (images.length == 0) {
+                        $('#modal-files').append("<p class='ms-3 mt-3'>Brak zdjęć o wymaganym formacie na serwerze. Wyślij najpierw plik na serwer.</p>");
+                        return;
+                    }
+
+                    var divHtml = '';
+
+                    for (let index in images) {
+                        divHtml += '<div class="col-sm-2 text-center mt-auto"><img src="'+images[index].url+'" class="img-fluid" /><div class="my-1"><small>'+images[index].name+'</small></div><button class="btn btn-primary btn-sm mb-4" onclick="chooseFile('+"'"+ takeFirstNChar(images[index].name, 30) + "'" +')"><i class="fas fa-solid fa-circle-check"></i>Wybierz</button></div>';
+                    }
+
+                    $('#modal-files').append(divHtml);
+                    return;
+                } 
+                else 
+                    toastr.error(errorMessage);
+            },
+            error: function (data) {
+                toastr.error(errorMessage);
+            },
+            dataType: "json"
+        });
+
+        }
+
+        function chooseFile(name) {
+            $('#modal-choose-file').modal('hide');
+            $('#' + selectedFileBrowseId).val(name);
+        }
+
+        $('#modal-choose-file-btn').on('click', function(e) {
+            window.location.href = '/file/files';
+        });
+
+        function takeFirstNChar(model, maxLength) {
+            if (!model)
+                return '';
+
+            if (model.length <= maxLength)
+                return model;
+
+            return model.substring(0, maxLength - 3) + "...";
+        }
+    </script>
+}

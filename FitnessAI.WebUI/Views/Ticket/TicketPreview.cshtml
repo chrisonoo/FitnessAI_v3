@@ -1,0 +1,50 @@
+﻿@model FitnessAI.Application.Tickets.Queries.GetPrintTicket.PrintTicketDto
+
+@{
+    Layout = "_LayoutMain";
+    ViewData["Title"] = "Kontakt";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/print-ticket.css"/>
+}
+
+<div class="ticket-template">
+
+    <div class="col">
+        <img src="~/@Model.Image" width="250"/>
+    </div>
+
+    <div class="col">
+        <h1>KARNET</h1>
+    </div>
+
+    <div class="col">
+        Właściciel: <b>@Model.FullName</b>
+    </div>
+
+    <div class="top-line"></div>
+
+    <div class="col">
+        Od: <b>@Model.StartDate.ToLongDateString()</b>
+    </div>
+
+    <div class="col">
+        Do: <b>@Model.EndDate.ToLongDateString()</b>
+    </div>
+
+    <div class="top-line"></div>
+
+    <div class="col">
+        <img src="@Model.QrCodeId" width="250"/>
+    </div>
+
+    <div class="col contact-info">
+        Telefon: <b>@Model.CompanyContactPhone</b>
+    </div>
+
+    <div class="col mt-1 contact-info">
+        Email: <b>@Model.CompanyContactEmail</b>
+    </div>
+
+</div>

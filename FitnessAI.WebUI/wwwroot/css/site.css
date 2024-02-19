@@ -1,0 +1,203 @@
+html {
+    font-size: 16px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.main-navbar {
+    font-size: 1.25rem;
+}
+
+.main-description {
+    font-size: 1.25rem;
+}
+
+.secondary-description {
+    font-size: 1.1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    filter: invert(100%);
+}
+
+ul.no-decoration {
+    list-style-type: none;
+}
+
+.privacy-police-info {
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    background-color: #464646;
+    width: 100%;
+    color: lightgray;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.privacy-police-btn {
+    font-size: 11px;
+}
+
+.field-validation-error {
+    color: #ff3333;
+    margin-left: .5rem;
+}
+
+i.fas {
+    margin-right: 0.5rem;
+}
+
+.card-border-top {
+    border-top: 3px solid #0d6efd;
+}
+
+.card-primary {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 640px) {
+    .card-body {
+        padding: 2rem;
+    }
+}
+
+ul.client-panel {
+    width: 100%;
+}
+
+ul.client-panel li.nav-item {
+    width: 100%;
+    padding-left: 1rem;
+}
+
+ul.client-panel li.nav-item.active {
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+
+.center-div-parent-container {
+    display: table;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.center-div-container {
+    display: table-cell;
+    vertical-align: middle;
+    min-width: 390px;
+}
+
+.bigger-icon {
+    font-size: 28px;
+}
+
+.card-body label, .modal-body label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.card-body .form-group:not(:first-child), .modal-body .form-group {
+    margin-top: 1rem;
+}
+
+.card-body .form-check, .modal-body .form-check {
+    margin-top: 1.5rem;
+}
+
+a.edit-link {
+    color: black;
+}
+
+.input-group-text.calendar, .input-group-text.input-group-colorpicker {
+    font-size: 1.5rem;
+}
+
+.announcements-header {
+    margin-top: 3rem;
+}
+
+.announcements-position {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.file-name {
+    line-height: 1rem;
+}
+
+small, .small {
+    font-size: 0.7rem;
+    font-weight: 400;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #007bff;
+    border-color: #006fe6;
+    color: #fff;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff;
+}
+
+.fileBrowse:hover {
+    cursor: pointer;
+}
+
+#calendar a {
+    color: black;
+}
+
+.language .dropdown-menu {
+    min-width: 0 !important;
+}
+
+.loading-overlay {
+    display: none;
+    background: rgba(255, 255, 255, 0.3);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 999;
+}
+
+.loading-gif {
+    z-index: 9999;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: 13px solid #f3f3f3;
+    border-top: 13px solid #3498db;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

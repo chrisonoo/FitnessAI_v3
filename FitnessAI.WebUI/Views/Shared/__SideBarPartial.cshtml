@@ -1,0 +1,128 @@
+@using FitnessAI.WebUI.Extensions
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using FitnessAI.Application.Dictionaries
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a asp-controller="Home" asp-action="Index" class="sidebar-brand d-flex align-items-center justify-content-center">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-solid fa-dumbbell"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Fitness AI</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item -->
+    <li class="nav-item @Url.MakeActiveClass("Client", "Dashboard")">
+        <a asp-controller="Client" asp-action="Dashboard" class="nav-link">
+            <i class="fas fa-regular fa-square-poll-vertical"></i>
+            <span>Pulpit</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Informacje
+    </div>
+
+    <!-- Nav Item -->
+    <li class="nav-item @Url.MakeActiveClass("Ticket", "Tickets,AddTicket")">
+        <a asp-controller="Ticket" asp-action="Tickets" class="nav-link">
+            <i class="fas fa-solid fa-calendar-check"></i>
+            <span>Karnety</span>
+        </a>
+    </li>
+
+    <!-- Nav Item -->
+    <li class="nav-item @Url.MakeActiveClass("Client", "Client,EditClient")">
+        <a asp-controller="Client" asp-action="Client" class="nav-link">
+            <i class="fas fa-solid fa-user"></i>
+            <span>Moje dane</span>
+        </a>
+    </li>
+
+    @if (User.IsInRole(RolesDict.ADMINISTRATOR) || User.IsInRole(RolesDict.PRACOWNIK))
+    {    
+        <!-- Divider -->
+         <hr class="sidebar-divider">
+     
+         <!-- Heading -->
+         <div class="sidebar-heading">
+             Admin
+         </div>
+         
+        <!-- Nav Item -->
+        <li class="nav-item @Url.MakeActiveClass("Client", "Clients,AddClient,EditAdminClient")">
+            <a asp-controller="Client" asp-action="Clients" class="nav-link">
+                <i class="fas fa-solid fa-users"></i>
+                <span>Klienci</span>
+            </a>
+        </li>
+
+        <!-- Nav Item -->
+        <li class="nav-item @Url.MakeActiveClass("Calendar", "Calendar")">
+            <a asp-controller="Calendar" asp-action="Calendar" class="nav-link">
+                <i class="fas fa-regular fa-calendar-days"></i>
+                <span>Grafik</span>
+            </a>
+        </li>
+    }
+
+    @if (User.IsInRole(RolesDict.ADMINISTRATOR))
+    {
+        <!-- Nav Item -->
+        <li class="nav-item @Url.MakeActiveClass("Employee", "Employees,AddEmployee,EditEmployee")">
+            <a asp-controller="Employee" asp-action="Employees" class="nav-link">
+                <i class="fas fa-solid fa-user-shield"></i>
+                <span>Pracownicy</span>
+            </a>
+        </li>
+        
+        <!-- Nav Item -->
+        <li class="nav-item @Url.MakeActiveClass("Role", "Roles,AddRole,EditRole")">
+            <a asp-controller="Role" asp-action="Roles" class="nav-link">
+                <i class="fas fa-solid fa-user-shield"></i>
+                <span>Role</span>
+            </a>
+        </li>
+        
+        <!-- Nav Item -->
+        <li class="nav-item @Url.MakeActiveClass("File", "Files")">
+            <a asp-controller="File" asp-action="Files" class="nav-link">
+                <i class="fas fa-solid fa-unlock-keyhole"></i>
+                <span>Pliki</span>
+            </a>
+        </li> 
+
+        <!-- Nav Item - Collapse Menu -->
+        <li class="nav-item @Url.MakeActiveClass("Settings", "Settings")">
+            <a href="#" class="nav-link collapsed" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-solid fa-screwdriver-wrench"></i>
+                <span>Ustawienia</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Wspólne:</h6>
+                    <a asp-controller="Settings" asp-action="Settings" class="collapse-item">Aplikacja</a>
+                    <a asp-controller="Settings" asp-action="Test" class="collapse-item">Test</a>
+                </div>
+            </div>
+        </li>
+    }
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline mt-5">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->
