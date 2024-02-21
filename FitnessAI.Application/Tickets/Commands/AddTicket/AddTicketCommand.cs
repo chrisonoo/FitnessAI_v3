@@ -7,8 +7,8 @@ namespace FitnessAI.Application.Tickets.Commands.AddTicket;
 // String zwraca id karnetu, który zostanie dodany do bazy danych
 public class AddTicketCommand : IRequest<string>
 {
-    [Required(ErrorMessage = "Pole 'Początek' jest wymagane")]
-    [DisplayName("Początek")]
+    [Required(ErrorMessage = "Pole 'Rozpoczęcie' jest wymagane")]
+    [DisplayName("Rozpoczęcie")]
     public DateTime StartDate { get; set; }
 
     [DisplayName("Cena")]

@@ -28,7 +28,7 @@ public class AddClientCommand : IRequest
     [DisplayName("Nazwisko")]
     public string LastName { get; set; }
 
-    [DisplayName("Czy osoba prywatna (bez faktury)?")]
+    [DisplayName("Klient prywatny (bez faktury)")]
     public bool IsPrivateAccount { get; set; }
 
     [DisplayName("NIP")]
@@ -46,8 +46,8 @@ public class AddClientCommand : IRequest
     [DisplayName("Ulica")]
     public string Street { get; set; }
 
-    [Required(ErrorMessage = "Pole 'Numer domu' jest wymagane")]
-    [DisplayName("Numer domu")]
+    [Required(ErrorMessage = "Pole 'Numer domu i mieszkania' jest wymagane")]
+    [DisplayName("Numer domu i mieszkania")]
     public string StreetNumber { get; set; }
 
     [Required(ErrorMessage = "Pole 'Kod pocztowy' jest wymagane")]

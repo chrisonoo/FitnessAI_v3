@@ -57,13 +57,13 @@
 
             <div class="form-group">
                 @Html.LabelFor(x => x.Client.Country)
-                @Html.TextBoxFor(x => x.Client.Country, new { @class = "form-control", placeholder = "Wprowadź kraj zamieszkania" })
+                @Html.TextBoxFor(x => x.Client.Country, new { @class = "form-control", placeholder = "Wprowadź kraj" })
                 @Html.ValidationMessageFor(x => x.Client.Country)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(x => x.Client.City)
-                @Html.TextBoxFor(x => x.Client.City, new { @class = "form-control", placeholder = "Wprowadź miejscowość zamieszkania" })
+                @Html.TextBoxFor(x => x.Client.City, new { @class = "form-control", placeholder = "Wprowadź miejscowość" })
                 @Html.ValidationMessageFor(x => x.Client.City)
             </div>
 
@@ -81,7 +81,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(x => x.Client.StreetNumber)
-                @Html.TextBoxFor(x => x.Client.StreetNumber, new { @class = "form-control", placeholder = "Wprowadź numer domu" })
+                @Html.TextBoxFor(x => x.Client.StreetNumber, new { @class = "form-control", placeholder = "Wprowadź numer domu i mieszkania" })
                 @Html.ValidationMessageFor(x => x.Client.StreetNumber)
             </div>
 
@@ -101,7 +101,7 @@
 
         <div class="card-footer">
             <button type="submit" class="btn btn-primary btn-lg">
-                <i class="fas fa-solid fa-circle-check"></i>Zapisz
+                <i class="fas fa-solid fa-circle-check me-2"></i>Zapisz
             </button>
         </div>
     }

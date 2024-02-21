@@ -40,8 +40,8 @@ public class AddEmployeeCommand : IRequest
     [DisplayName("Ulica")]
     public string Street { get; set; }
 
-    [Required(ErrorMessage = "Pole 'Numer domu' jest wymagane")]
-    [DisplayName("Numer domu")]
+    [Required(ErrorMessage = "Pole 'Numer domu i mieszkania' jest wymagane")]
+    [DisplayName("Numer domu i mieszkania")]
     public string StreetNumber { get; set; }
 
     [Required(ErrorMessage = "Pole 'Kod pocztowy' jest wymagane")]

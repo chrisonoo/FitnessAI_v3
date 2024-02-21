@@ -9,49 +9,35 @@
     <div class="card-body">
 
         <a asp-controller="Client" asp-action="EditClient" class="btn btn-primary mb-3" role="button">
-            <i class="fas fa-solid fa-circle-plus"></i>Aktualizuj swoje dane
+            <i class="fas fa-solid fa-circle-plus me-2"></i>Aktualizuj swoje dane
         </a>
 
         @if (string.IsNullOrWhiteSpace(Model.FirstName))
         {
             <p class="text-danger mt-2">
-                <b>Uzupełnij proszę swoje dane.</b>
+                <b>Proszę o uzupełnienie danych aby odblokować wszystkie funkcje aplikacji.</b>
             </p>
 
+            <p>Jesteś zalogowany.</p>
             <p>Adres e-mail: <b>@Model.Email</b></p>
         }
         else
         {
-            <h3 class="mt-2">
-                @Model.FirstName @Model.LastName
-            </h3>
+            <h3 class="mt-3">@Model.FirstName @Model.LastName</h3>
 
-            <p class="mt-4">Adres e-mail: <b>@Model.Email</b></p>
+            <p class="mt-3"><b>Adres e-mail:</b> @Model.Email</p>
 
             @if (Model.IsPrivateAccount)
             {
-                <p>
-                    <b>Konto prywatne</b>
-                </p>
+                <p><b>Typ użytkownika:</b> Konto prywatne</p>
             }
             else
             {
-                <p>
-                    <b>Konto firmowe</b>
-                </p>
-
-                <p>NIP: <b>@Model.NipNumber</b></p>
+                <p><b>Typ użytkownika:</b> Konto firmowe, <b>NIP:</b> @Model.NipNumber</p>
             }
 
-            <p class="mt-5">Adres zamieszkania:</p>
-
-            <p>@Model.Country</p>
-
-            <p>@Model.ZipCode @Model.City</p>
-
-            <p>@Model.Street @Model.StreetNumber</p>
-
-            <p class="mt-4">Data rejestracji: <b>@Model.RegisterDateTime.ToString("dd-MM-yyyy")</b></p>
+            <p class="mt-2"><b>Adres:</b> @Model.Country, @Model.ZipCode @Model.City, @Model.Street @Model.StreetNumber</p>
+            <p class="mt-2"><b>Data rejestracji:</b> @Model.RegisterDateTime.ToString("dd-MM-yyyy")</p>
         }
 
 
