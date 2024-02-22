@@ -6,6 +6,7 @@ using FitnessAI.Application.Tickets.Queries.GetClientsTickets;
 using FitnessAI.Application.Tickets.Queries.GetPdfTicket;
 using FitnessAI.Application.Tickets.Queries.GetPrintTicket;
 using FitnessAI.WebUI.Extensions;
+using FitnessAI.WebUI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -32,23 +33,34 @@ public class TicketController : BaseController
     public async Task<IActionResult> Tickets()
     {
         var isUserDataCompleted =
-            !string.IsNullOrWhiteSpace((await Mediator.Send(new GetClientQuery { UserId = UserId })).FirstName);
+            !string.IsNullOrWhiteSpace((await Mediator.Send(new GetClientQuery { UserId = LoggetUserId })).FirstName);
 
-        return View(isUserDataCompleted);
+        var ticketsViewModel = new TicketsViewModel
+        {
+            IsUserDataCompleted = isUserDataCompleted
+        };
+        
+        // Test płatności
+        var newTicketSessionId = TempData["NewTicketSessionId"];
+        if (newTicketSessionId != null)
+            ticketsViewModel.NewTicketSessionId = newTicketSessionId.ToString();
+        
+        return View(ticketsViewModel);
     }
 
     public async Task<IActionResult> TicketsDataTable(IDataTablesRequest request)
     {
         var tickets = await Mediator.Send(new GetClientsTicketsQuery
         {
-            UserId = UserId,
+            UserId = LoggetUserId,
             PageSize = request.Length,
             SearchValue = request.Search.Value,
             PageNumber = request.GetPageNumber(),
             OrderInfo = request.GetOrderInfo()
         });
 
-        return request.GetResponse(tickets);
+        var response = request.GetResponse(tickets);
+        return response;
     }
 
     public async Task<IActionResult> AddTicket()
@@ -60,24 +72,23 @@ public class TicketController : BaseController
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddTicket(AddTicketVm vm)
     {
-        var result = await MediatorSendValidate(new AddTicketCommand
+        var result = await Mediator.Send(new AddTicketCommand
         {
             StartDate = vm.Ticket.StartDate,
             TicketTypeId = vm.Ticket.TicketTypeId,
-            UserId = UserId,
+            UserId = LoggetUserId,
             Price = vm.Ticket.Price
         });
 
-        if (!result.IsValid)
-            return View(vm);
-
         TempData["Success"] = "Nowy karnet został utworzony, oczekiwanie na zweryfikowanie płatności.";
         
+        // TODO:: Uwzględnić tłumacznie przy zmianie języka
         // TempData["Success"] = _localizer["TicketCreated"].Value;
+        
+        // Symulacja potwierdzenia płatności od systemu obsługującego płatności
+        TempData["NewTicketSessionId"] = result;
 
         return RedirectToAction(nameof(Tickets));
-        
-        // return Redirect($"{_configuration.GetValue<string>("Przelewy24:BaseUrl")}/trnRequest/{result.Model}");
     }
 
     public async Task<IActionResult> TicketPreview(string id)
@@ -85,7 +96,7 @@ public class TicketController : BaseController
         var ticket = await Mediator.Send(new GetPrintTicketQuery
         {
             TicketId = id,
-            UserId = UserId
+            UserId = LoggetUserId
         });
 
         return View(ticket);
@@ -98,7 +109,7 @@ public class TicketController : BaseController
             var ticketPdfVm = await Mediator.Send(new GetPdfTicketQuery
             {
                 TicketId = id,
-                UserId = UserId,
+                UserId = LoggetUserId,
                 Context = ControllerContext
             });
 
@@ -131,7 +142,7 @@ public class TicketController : BaseController
         var ticket = await Mediator.Send(new GetPrintTicketQuery
         {
             TicketId = id,
-            UserId = UserId
+            UserId = LoggetUserId
         });
 
         return View("TicketPreview", ticket);

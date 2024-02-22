@@ -6,7 +6,6 @@ using FitnessAI.Infrastructure.Encryption;
 using FitnessAI.Infrastructure.Events;
 using FitnessAI.Infrastructure.Identity;
 using FitnessAI.Infrastructure.Invoices;
-using FitnessAI.Infrastructure.Payments;
 using FitnessAI.Infrastructure.Pdf;
 using FitnessAI.Infrastructure.Persistence;
 using FitnessAI.Infrastructure.Services;
@@ -72,7 +71,6 @@ public static class DependencyInjection
         services.AddSingleton<ICurrentUserService, CurrentUserService>();
         services.AddSingleton<IHttpContext, MyHttpContext>();
         services.AddSingleton<IFileManagerService, FileManagerService>();
-        services.AddHttpClient<IPrzelewy24, Przelewy24>();
         services.AddHttpClient<IGymInvoices, GymInvoices>();
         services.AddScoped<IQrCodeGenerator, QrCodeGenerator>();
         services.AddScoped<IPdfFileGenerator, RotativaPdfGenerator>();

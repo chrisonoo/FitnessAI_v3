@@ -25,7 +25,7 @@ public class GetClientsTicketsQueryHandler : IRequestHandler<GetClientsTicketsQu
             .Where(x => x.UserId == request.UserId)
             .AsNoTracking();
 
-        // Możemy filtrować po polu SearchValue.
+        // TODO:: Filtrowanie po polu Search
         //if (!string.IsNullOrWhiteSpace(request.SearchValue))
         //    tickets = tickets.Where(x => x.Id.Contains(request.SearchValue));
 

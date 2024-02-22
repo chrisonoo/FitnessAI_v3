@@ -5,7 +5,7 @@
 
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
-    var cultureItems = LocOptions.Value.SupportedUICultures
+    var cultureItems = LocOptions.Value.SupportedUICultures!
         .Select(x => new SelectListItem { Value = x.Name })
         .ToList();
     var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";

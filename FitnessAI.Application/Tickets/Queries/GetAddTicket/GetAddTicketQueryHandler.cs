@@ -26,7 +26,7 @@ public class GetAddTicketQueryHandler : IRequestHandler<GetAddTicketQuery, AddTi
         vm.Ticket = new AddTicketCommand
         {
             StartDate = _dateTimeService.Now,
-            TicketTypeId = 1
+            TicketTypeId = 3
         };
 
         vm.AvailableTicketTypes = await _context.TicketTypes
@@ -34,7 +34,7 @@ public class GetAddTicketQueryHandler : IRequestHandler<GetAddTicketQuery, AddTi
             .ThenInclude(x => x.Language)
             .AsNoTracking()
             .Select(x => x.ToDto())
-            .ToListAsync();
+            .ToListAsync(cancellationToken: cancellationToken);
 
         return vm;
     }

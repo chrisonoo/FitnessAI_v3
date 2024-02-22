@@ -16,18 +16,18 @@ public class ClientController : BaseController
 {
     public async Task<IActionResult> Dashboard()
     {
-        var vm = await Mediator.Send(new GetClientDashboardQuery { UserId = UserId });
+        var vm = await Mediator.Send(new GetClientDashboardQuery { UserId = LoggetUserId });
         return View(vm);
     }
 
     public async Task<IActionResult> Client()
     {
-        return View(await Mediator.Send(new GetClientQuery { UserId = UserId }));
+        return View(await Mediator.Send(new GetClientQuery { UserId = LoggetUserId }));
     }
 
     public async Task<IActionResult> EditClient()
     {
-        return View(await Mediator.Send(new GetEditClientQuery { UserId = UserId }));
+        return View(await Mediator.Send(new GetEditClientQuery { UserId = LoggetUserId }));
     }
 
     [HttpPost]

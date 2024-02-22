@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using System.Globalization
-@model bool
+@model TicketsViewModel
 
 @{
     ViewData["Title"] = "Karnety";
@@ -18,7 +18,7 @@
 
     <div class="card-body">
 
-        @if (Model)
+        @if (Model.IsUserDataCompleted)
         {
             <a asp-controller="Ticket" asp-action="AddTicket" class="btn btn-primary mb-3" role="button">
                 <i class="fas fa-solid fa-circle-plus me-2"></i>Kup karnet
@@ -82,7 +82,7 @@
                     className: "desktop",
                     sortable: false,
                     searchable: false,
-                    render: function (data, type, row) {
+                    render (data, type, row){
                         var payBtn = '', previewBtn = '', pdfBtn = '', printBtn = '', invoiceBtn = '';
 
                         if (row.isPaid) {
@@ -110,9 +110,9 @@
             type: "POST",
             url: "/Ticket/TicketToPdf",
             data: {
-                id: id
+                id
             },
-            success: function (data) {
+            success (data){
                 if (data.success) {
                     window.location = '@Url.Action("DownloadTicketPdf", "Ticket")' + '?fileGuid=' + data.fileGuid + '&fileName=' + data.fileName;
                 } 
@@ -121,7 +121,7 @@
 
                 $('.loading-overlay').hide();
             },
-            error: function (data) {
+            error (data){
                 toastr.error('Błąd. Nie udało się wygenerować karnetu. Spróbuj ponownie lub skontaktuj się z administartorem.');
                 $('.loading-overlay').hide();
             },
@@ -139,9 +139,9 @@
             type: "POST",
             url: "/Invoice/InvoiceToPdf",
             data: {
-                id: id
+                id
             },
-            success: function (data) {
+            success (data){
                 if (data.success) {
                     window.location = '@Url.Action("DownloadInvoicePdf", "Invoice")' + '?fileGuid=' + data.fileGuid + '&fileName=' + data.fileName;
                 } 
@@ -149,7 +149,7 @@
                     toastr.error('Błąd. Nie udało się wygenerować faktury. Spróbuj ponownie lub skontaktuj się z administartorem.');
                     $('.loading-overlay').hide();
             },
-            error: function (data) {
+            error (data){
                 toastr.error('Błąd. Nie udało się wygenerować faktury. Spróbuj ponownie lub skontaktuj się z administartorem.');
                 $('.loading-overlay').hide();
             },
@@ -171,6 +171,44 @@
                 myWindow.close();
             };
         };
+    }
+    
+    $(document).ready(function() {
+        if ('@Model.NewTicketSessionId' !== null && '@Model.NewTicketSessionId' !== '') {
+            let data = {
+                sessionId: '@Model.NewTicketSessionId',
+            };
+            
+            console.log();
+            console.log('@Model.NewTicketSessionId');
+            console.log();
+            
+            setTimeout(function () {
+                $.ajax({
+                    url: '/api/ticket/updatestatus/',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success (response){
+                        refreshTickets();
+                    },
+                    error (error){
+                        refreshTickets();
+                    }
+                });
+            }, 3000);
+        }
+    });
+    
+    function refreshTickets(){
+        setTimeout(function () {
+            location.reload();
+            
+            console.log();
+            console.log('Przeładowanie całej strony.');
+            console.log();
+        }, 2000);
     }
 
 </script>
