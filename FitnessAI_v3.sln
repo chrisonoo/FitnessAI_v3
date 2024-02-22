@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessAI.Application", "Fi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessAI.Infrastructure", "FitnessAI.Infrastructure\FitnessAI.Infrastructure.csproj", "{FFBDF23F-33E3-446F-9620-4ACEBD8C5B5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessAI.Maui", "FitnessAI.Maui\FitnessAI.Maui.csproj", "{B3184753-90C1-4E5C-88BD-1C34F47C62AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FFBDF23F-33E3-446F-9620-4ACEBD8C5B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFBDF23F-33E3-446F-9620-4ACEBD8C5B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFBDF23F-33E3-446F-9620-4ACEBD8C5B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3184753-90C1-4E5C-88BD-1C34F47C62AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3184753-90C1-4E5C-88BD-1C34F47C62AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3184753-90C1-4E5C-88BD-1C34F47C62AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3184753-90C1-4E5C-88BD-1C34F47C62AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
