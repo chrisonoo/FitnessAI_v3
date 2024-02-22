@@ -34,7 +34,6 @@ public class GetClientsTicketsQueryHandler : IRequestHandler<GetClientsTicketsQu
             : tickets = tickets.OrderByDescending(x => x.EndDate);
 
         var paginatedList = await tickets
-            .Include(x => x.Invoice)
             .Select(x => x.ToBasicsDto())
             .PaginatedListAsync(request.PageNumber, request.PageSize);
 

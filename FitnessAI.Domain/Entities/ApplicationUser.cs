@@ -14,6 +14,5 @@ public class ApplicationUser : IdentityUser
     public Employee Employee { get; set; }
 
     public ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
-    public ICollection<Invoice> Invoices { get; set; } = new HashSet<Invoice>();
     public ICollection<EmployeeEvent> EmployeeEvents { get; set; } = new HashSet<EmployeeEvent>();
 }

@@ -18,7 +18,6 @@ public interface IApplicationDbContext : IDisposable
     DbSet<Announcement> Announcements { get; set; }
     DbSet<Language> Languages { get; set; }
     DbSet<TicketTypeTranslation> TicketTypeTranslations { get; set; }
-    DbSet<Invoice> Invoices { get; set; }
     DbSet<ApplicationUser> Users { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

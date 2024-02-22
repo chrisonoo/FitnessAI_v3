@@ -16,7 +16,6 @@ public static class TicketExtensions
             EndDate = ticket.EndDate.ToString("yyyy-MM-dd"),
             StartDate = ticket.StartDate.ToString("yyyy-MM-dd"),
             IsPaid = ticket.IsPaid,
-            InvoiceId = ticket.Invoice?.Id,
             Id = ticket.Id
         };
     }

@@ -83,18 +83,17 @@
                     sortable: false,
                     searchable: false,
                     render (data, type, row){
-                        var payBtn = '', previewBtn = '', pdfBtn = '', printBtn = '', invoiceBtn = '';
+                        var payBtn = '', previewBtn = '', pdfBtn = '', printBtn = '';
 
                         if (row.isPaid) {
                             previewBtn = '<a class="btn btn-success btn-sm" role="button" href="/Ticket/TicketPreview?Id='+row.id+'"><i class="fas fa-solid fa-square-check"></i>Zobacz</a>';
                             pdfBtn = '<button class="btn btn-secondary btn-sm ms-1" onclick="generateTicket(\''+row.id+'\')"><i class="fas fa-solid fa-file-pdf"></i>PDF</button>';
                             printBtn = '<button class="btn btn-secondary btn-sm ms-1" onclick="printTicket(\''+row.id+'\')"><i class="fas fa-solid fa-print"></i>Drukuj</button>';
-                            invoiceBtn = '<button class="btn btn-secondary btn-sm ms-1" onclick="generateInvoice(\''+row.invoiceId+'\')"><i class="fas fa-solid fa-file-pdf"></i>Faktura</button>';
                         } else {
                             payBtn = '<span class="badge bg-warning text-dark">Weryfikacja</span>';
                         }
 
-                        return previewBtn + payBtn + pdfBtn + printBtn + invoiceBtn;
+                        return previewBtn + payBtn + pdfBtn + printBtn;
                     }
                 }
             ]
@@ -130,35 +129,6 @@
         });
 
     }
-
-    function generateInvoice(id) {
-
-        $('.loading-overlay').show();
-
-        $.ajax({
-            type: "POST",
-            url: "/Invoice/InvoiceToPdf",
-            data: {
-                id
-            },
-            success (data){
-                if (data.success) {
-                    window.location = '@Url.Action("DownloadInvoicePdf", "Invoice")' + '?fileGuid=' + data.fileGuid + '&fileName=' + data.fileName;
-                } 
-                else 
-                    toastr.error('Błąd. Nie udało się wygenerować faktury. Spróbuj ponownie lub skontaktuj się z administartorem.');
-                    $('.loading-overlay').hide();
-            },
-            error (data){
-                toastr.error('Błąd. Nie udało się wygenerować faktury. Spróbuj ponownie lub skontaktuj się z administartorem.');
-                $('.loading-overlay').hide();
-            },
-            dataType: "json",
-            cache: false
-        });
-
-    }
-
 
     function printTicket(id) {
         var url = '@Url.Action("PrintTicket", "Ticket")' + '?id=' + id;

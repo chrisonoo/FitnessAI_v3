@@ -30,11 +30,5 @@ internal class TicketConfiguration : IEntityTypeConfiguration<Ticket>
             .WithMany(x => x.Tickets)
             .HasForeignKey(x => x.TicketTypeId)
             .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(x => x.Invoice)
-            .WithOne(x => x.Ticket)
-            .HasForeignKey<Invoice>(x => x.TicketId)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }
