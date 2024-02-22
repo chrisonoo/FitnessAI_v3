@@ -4,7 +4,6 @@ using FitnessAI.Application.Tickets.Events;
 using FitnessAI.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace FitnessAI.Application.Tickets.Commands.MarkTicketAsPaidCommand;
 
@@ -15,7 +14,6 @@ public class MarkTicketAsPaidCommandHandler : IRequestHandler<MarkTicketAsPaidCo
 
     public MarkTicketAsPaidCommandHandler(
         IApplicationDbContext context,
-        ILogger<MarkTicketAsPaidCommandHandler> logger,
         IEventDispatcher eventDispatcher)
     {
         _context = context;

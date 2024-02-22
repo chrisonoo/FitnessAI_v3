@@ -19,7 +19,7 @@ public class TicketApiController : BaseApiController
         }
         catch (Exception exception)
         {
-            return BadRequest();
+            return BadRequest(exception.Message);
         }
 
         var json = JsonConvert.SerializeObject(new { success = true });
