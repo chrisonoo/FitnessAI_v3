@@ -41,10 +41,24 @@
                 <HorizontalStackLayout
                     Spacing="10">
                     <Image
+                        Source="profilesettings"
+                        HeightRequest="25" />
+                    <Label
+                        Text="Imię i Nazwisko"
+                        FontSize="Medium" />
+                </HorizontalStackLayout>
+                
+                <Border
+                    HeightRequest="1"
+                    BackgroundColor="Gray" />
+                
+                <HorizontalStackLayout
+                    Spacing="10">
+                    <Image
                         Source="orders"
                         HeightRequest="25" />
                     <Label
-                        Text="My Orders"
+                        Text="Adres"
                         FontSize="Medium" />
                 </HorizontalStackLayout>
 
@@ -55,24 +69,10 @@
                 <HorizontalStackLayout
                     Spacing="10">
                     <Image
-                        Source="profilesettings"
-                        HeightRequest="25" />
-                    <Label
-                        Text="My Information"
-                        FontSize="Medium" />
-                </HorizontalStackLayout>
-                
-                <Border
-                    HeightRequest="1"
-                    BackgroundColor="Gray" />
-                
-                <HorizontalStackLayout
-                    Spacing="10">
-                    <Image
                         Source="faq"
                         HeightRequest="25" />
                     <Label
-                        Text="FAQ"
+                        Text="Rodzaj konta"
                         FontSize="Medium" />
                 </HorizontalStackLayout>
             </VerticalStackLayout>
