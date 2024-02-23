@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FitnessAI.Maui.Pages.ProfilePage">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FitnessAI.Maui.Pages.ProfilePage">
+    
     <ContentPage.Content>
-        
+
+        <Grid
+            RowDefinitions="Auto,5*,1*"
+            RowSpacing="0">
+            
+            <VerticalStackLayout
+                Grid.Row="0"
+                BackgroundColor="Gray"
+                VerticalOptions="Start"
+                Spacing="5"
+                Padding="20">
+                
+                <ImageButton
+                    Source="uploadphoto.png"
+                    HeightRequest="120"
+                    WidthRequest="120"
+                    CornerRadius="60"
+                    Padding="0"
+                    Aspect="AspectFill"
+                    x:Name="ImgUserProfileBtn" />
+
+                <Label
+                    x:Name="LblUsername"
+                    HorizontalOptions="Center"
+                    TextColor="White"/>
+            </VerticalStackLayout>
+
+            <Button
+                Grid.Row="2"
+                Text="Logout"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                BackgroundColor="Transparent"
+                TextColor="Red"
+                x:Name="BtnLogout"
+                Clicked="BtnLogout_OnClicked" />
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

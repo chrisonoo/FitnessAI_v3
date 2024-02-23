@@ -5,5 +5,11 @@
              x:Class="FitnessAI.Maui.Pages.TicketPage">
     <ContentPage.Content>
         
+        <Label 
+            Text="Ticket Page" 
+            FontSize="Large"
+            HorizontalOptions="Center" 
+            VerticalOptions="CenterAndExpand" />
+        
     </ContentPage.Content>
 </ContentPage>
