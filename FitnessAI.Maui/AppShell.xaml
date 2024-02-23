@@ -20,15 +20,15 @@
             ContentTemplate="{DataTemplate pages:MainPage}"
             Route="MainPage" />
         <ShellContent
-            Title="Cart"
-            Icon="cart"
+            Title="Workout"
+            Icon="workout"
             ContentTemplate="{DataTemplate pages:WorkoutPage}"
-            Route="CartPage" />
+            Route="WorkoutPage" />
         <ShellContent
-            Title="Favorites"
-            Icon="heart"
+            Title="Ticket"
+            Icon="ticket"
             ContentTemplate="{DataTemplate pages:TicketPage}"
-            Route="FavoritesPage" />
+            Route="TicketPage" />
         <ShellContent
             Title="Profile"
             Icon="profile"
