@@ -20,12 +20,12 @@
                    Padding="15"
                    BackgroundColor="White">
                 <VerticalStackLayout>
-                    <Entry Placeholder="Email"
-                           x:Name="EntEmail" />
+                    <Entry Placeholder="Nazwa użytkownika"
+                           x:Name="UsernameEntry" />
 
-                    <Entry Placeholder="Password"
+                    <Entry Placeholder="Hasło"
                            IsPassword="True"
-                           x:Name="EntPassword" />
+                           x:Name="PasswordEntry" />
                 </VerticalStackLayout>
             </Frame>
 

@@ -10,21 +10,19 @@ public static class ApiService
     
     static ApiService()
     {
-        // var handler = new HttpClientHandler();
-        // handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
-        // HttpClient = new HttpClient(handler);
         HttpClient = new HttpClient();
     }
 
-    public static async Task<bool> Login(string email, string password)
+    public static async Task<bool> Login(string username, string password)
     {
-        var login = new LoginViewModel { Email = email, Password = password };
+        var login = new UserLoginViewModel { Username = username, Password = password };
         
         var json = JsonConvert.SerializeObject(login);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         var response = await HttpClient.PostAsync($"{AppSettings.ApiUrl}/api/apiusers/login", content);
         if (!response.IsSuccessStatusCode) return false;
+        
         var jsonResult = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<Token>(jsonResult);
         Preferences.Set("access_token", result!.AccessToken);

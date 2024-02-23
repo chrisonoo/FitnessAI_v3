@@ -16,10 +16,10 @@ public partial class LoginPage
 
     private async void BtnSignIn_Clicked(object? sender, EventArgs e)
     {
-        var response = await ApiService.Login(EntEmail.Text, EntPassword.Text);
+        var response = await ApiService.Login(UsernameEntry.Text, PasswordEntry.Text);
         if (response)
             Application.Current!.MainPage = new AppShell();
         else
-            await DisplayAlert("Error", "Invalid email or password", "Ok");
+            await DisplayAlert("Błąd", "Błędny email lub hasło", "Ok");
     }
 }

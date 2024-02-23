@@ -17,16 +17,20 @@ public class ApiUsersController : ControllerBase
     }
 
     [HttpPost("[action]")]
-    public async Task<IActionResult> Login([FromBody] ApiLoginModel model)
+    public async Task<IActionResult> Login([FromBody] ApiUserLoginDto userLoginDto)
     {
         const string ACCESS_TOKEN = "temporary-token-12345";
-        
-        var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: false, lockoutOnFailure: false);
+
+        var result = await _signInManager.PasswordSignInAsync(
+            userLoginDto.Username ?? string.Empty,
+            userLoginDto.Password ?? string.Empty,
+            false,
+            false);
         if (!result.Succeeded) return Unauthorized();
-        
-        var currentUser = await _signInManager.UserManager.FindByNameAsync(model.Username);
-            
-        return new ObjectResult(new
+
+        var currentUser = await _signInManager.UserManager.FindByNameAsync(userLoginDto.Username);
+
+        return Ok(new
         {
             access_token = ACCESS_TOKEN,
             user_id = currentUser.Id,
