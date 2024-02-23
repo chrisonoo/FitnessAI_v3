@@ -13,22 +13,39 @@ public static class ApiService
         HttpClient = new HttpClient();
     }
 
-    public static async Task<bool> Login(string username, string password)
+    public static async Task<int> Login(string username, string password)
     {
-        var login = new UserLoginViewModel { Username = username, Password = password };
+        var login = new UserLoginDto { Username = username, Password = password };
         
         var json = JsonConvert.SerializeObject(login);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         var response = await HttpClient.PostAsync($"{AppSettings.ApiUrl}/api/apiusers/login", content);
-        if (!response.IsSuccessStatusCode) return false;
+        if (!response.IsSuccessStatusCode) return (int)response.StatusCode;
         
         var jsonResult = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<Token>(jsonResult);
+        var result = JsonConvert.DeserializeObject<TokenDto>(jsonResult);
         Preferences.Set("access_token", result!.AccessToken);
         Preferences.Set("user_id", result.UserId);
         Preferences.Set("user_name", result.UserName);
 
-        return true;
+        return (int)response.StatusCode;
+    }
+    
+    public static async Task<CurrentUserDetailsViewModel> CurrentUserDetails()
+    {
+        var username = Preferences.Get("user_name", string.Empty);
+        var token = Preferences.Get("access_token", string.Empty);
+        var login = new CurrentUserLoginDto { Username = username, AccessToken = token };
+        
+        var json = JsonConvert.SerializeObject(login);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        
+        var response = await HttpClient.PostAsync($"{AppSettings.ApiUrl}/api/apiusers/currentuserdetails", content);
+        if (!response.IsSuccessStatusCode) return new CurrentUserDetailsViewModel();
+        
+        var jsonResult = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<CurrentUserDetailsViewModel>(jsonResult);
+        return result!;
     }
 }

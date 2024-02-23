@@ -4,20 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="FitnessAI.Maui.Pages.ProfilePage">
-    
+
     <ContentPage.Content>
 
         <Grid
             RowDefinitions="Auto,5*,1*"
             RowSpacing="0">
-            
+
             <VerticalStackLayout
                 Grid.Row="0"
                 BackgroundColor="Gray"
                 VerticalOptions="Start"
                 Spacing="5"
                 Padding="20">
-                
+
                 <ImageButton
                     Source="uploadphoto.png"
                     HeightRequest="120"
@@ -30,12 +30,56 @@
                 <Label
                     x:Name="LblUsername"
                     HorizontalOptions="Center"
-                    TextColor="White"/>
+                    TextColor="White" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Grid.Row="1"
+                Margin="20"
+                Spacing="20">
+                
+                <HorizontalStackLayout
+                    Spacing="10">
+                    <Image
+                        Source="orders"
+                        HeightRequest="25" />
+                    <Label
+                        Text="My Orders"
+                        FontSize="Medium" />
+                </HorizontalStackLayout>
+
+                <Border
+                    HeightRequest="1"
+                    BackgroundColor="Gray" />
+                
+                <HorizontalStackLayout
+                    Spacing="10">
+                    <Image
+                        Source="profilesettings"
+                        HeightRequest="25" />
+                    <Label
+                        Text="My Information"
+                        FontSize="Medium" />
+                </HorizontalStackLayout>
+                
+                <Border
+                    HeightRequest="1"
+                    BackgroundColor="Gray" />
+                
+                <HorizontalStackLayout
+                    Spacing="10">
+                    <Image
+                        Source="faq"
+                        HeightRequest="25" />
+                    <Label
+                        Text="FAQ"
+                        FontSize="Medium" />
+                </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <Button
                 Grid.Row="2"
-                Text="Logout"
+                Text="Wyloguj"
                 FontSize="Medium"
                 HorizontalOptions="Center"
                 BackgroundColor="Transparent"

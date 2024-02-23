@@ -1,6 +1,6 @@
 namespace FitnessAI.Maui.Models;
 
-public class UserLoginViewModel
+public class UserLoginDto
 {
     public string Username { get; set; } = default!;
     public string Password { get; set; } = default!;

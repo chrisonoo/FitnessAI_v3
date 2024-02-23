@@ -27,8 +27,10 @@ public class ApiUsersController : ControllerBase
             false,
             false);
         if (!result.Succeeded) return Unauthorized();
-
+        
         var currentUser = await _signInManager.UserManager.FindByNameAsync(userLoginDto.Username);
+        if (currentUser.FirstName == null || currentUser.LastName == null)
+            return StatusCode(403);
 
         return Ok(new
         {
@@ -36,5 +38,36 @@ public class ApiUsersController : ControllerBase
             user_id = currentUser.Id,
             user_name = currentUser.UserName
         });
+    }
+    
+    [HttpGet("[action]")]
+    public async Task<IActionResult> CurrentUserDetails([FromBody] ApiCurrentUserDto curentUserDto)
+    {
+        if (await IsUserAuthorized(curentUserDto)) return Unauthorized();
+        
+        var currentUser = await _signInManager.UserManager.FindByNameAsync(curentUserDto.Username);
+        
+        return Ok(new
+        {
+            first_name = currentUser.FirstName,
+            last_name = currentUser.LastName,
+            email = currentUser.Email,
+            country = currentUser.Address?.Country,
+            zip_code = currentUser.Address?.ZipCode,
+            city = currentUser.Address?.City,
+            street = currentUser.Address?.Street,
+            street_number = currentUser.Address?.StreetNumber,
+            register_date = currentUser.RegisterDateTime.ToString("yyyy-MM-dd"),
+            account_type = currentUser.Client.IsPrivateAccount ? "Prywatne" : "Firmowe"
+        });
+    }
+    
+    private async Task<bool> IsUserAuthorized(ApiCurrentUserDto curentUserDto)
+    {
+        const string ACCESS_TOKEN = "temporary-token-12345";
+        var currentUserToken = curentUserDto.AccessToken;
+        var currentUser = await _signInManager.UserManager.FindByNameAsync(curentUserDto.Username);
+        
+        return currentUser != null && currentUserToken == ACCESS_TOKEN;
     }
 }
