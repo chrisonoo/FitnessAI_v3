@@ -33,4 +33,7 @@ public class CurrentUserDetailsViewModel
     
     [JsonProperty("account_type")]
     public string AccountType { get; set; } = default!;
+    
+    public string FullName => $"{FirstName} {LastName}";
+    public string FullAddress => $"{Country}, {ZipCode} {City}, {Street} {StreetNumber}";
 }

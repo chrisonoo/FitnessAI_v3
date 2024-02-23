@@ -3,6 +3,8 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FitnessAI.Maui.Models"
+    x:DataType="local:CurrentUserDetailsViewModel"
     x:Class="FitnessAI.Maui.Pages.ProfilePage">
 
     <ContentPage.Content>
@@ -30,7 +32,8 @@
                 <Label
                     x:Name="LblUsername"
                     HorizontalOptions="Center"
-                    TextColor="White" />
+                    TextColor="White" 
+                    Text="{Binding Email}"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout
@@ -45,8 +48,11 @@
                         HeightRequest="25" />
                     <Label
                         Text="Imię i Nazwisko"
-                        FontSize="Medium" />
+                        FontSize="Default" />
                 </HorizontalStackLayout>
+                <Label
+                    Text="{Binding FullName}"
+                    FontSize="Medium" />
                 
                 <Border
                     HeightRequest="1"
@@ -59,8 +65,11 @@
                         HeightRequest="25" />
                     <Label
                         Text="Adres"
-                        FontSize="Medium" />
+                        FontSize="Default" />
                 </HorizontalStackLayout>
+                <Label
+                    Text="{Binding FullAddress}"
+                    FontSize="Medium" />
 
                 <Border
                     HeightRequest="1"
@@ -73,8 +82,11 @@
                         HeightRequest="25" />
                     <Label
                         Text="Rodzaj konta"
-                        FontSize="Medium" />
+                        FontSize="Default" />
                 </HorizontalStackLayout>
+                <Label
+                    Text="{Binding AccountType}"
+                    FontSize="Medium" />
             </VerticalStackLayout>
 
             <Button

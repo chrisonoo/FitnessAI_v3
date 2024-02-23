@@ -1,34 +1,33 @@
+using FitnessAI.Application.Common.Interfaces;
 using FitnessAI.Domain.Entities;
 using FitnessAI.WebUI.Models.Api;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessAI.WebUI.Controllers.Api;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
-public class ApiUsersController : ControllerBase
+public class ApiUsersController : BaseApiController
 {
-    private readonly SignInManager<ApplicationUser> _signInManager;
-
-    public ApiUsersController(SignInManager<ApplicationUser> signInManager)
+    public ApiUsersController(SignInManager<ApplicationUser> signInManager, IApplicationDbContext context) : base(signInManager, context)
     {
-        _signInManager = signInManager;
     }
-
-    [HttpPost("[action]")]
+    
+    [HttpPost]
     public async Task<IActionResult> Login([FromBody] ApiUserLoginDto userLoginDto)
     {
         const string ACCESS_TOKEN = "temporary-token-12345";
 
-        var result = await _signInManager.PasswordSignInAsync(
+        var result = await SignInManager.PasswordSignInAsync(
             userLoginDto.Username ?? string.Empty,
             userLoginDto.Password ?? string.Empty,
             false,
             false);
         if (!result.Succeeded) return Unauthorized();
         
-        var currentUser = await _signInManager.UserManager.FindByNameAsync(userLoginDto.Username);
+        var currentUser = await SignInManager.UserManager.FindByNameAsync(userLoginDto.Username);
         if (currentUser.FirstName == null || currentUser.LastName == null)
             return StatusCode(403);
 
@@ -40,12 +39,15 @@ public class ApiUsersController : ControllerBase
         });
     }
     
-    [HttpGet("[action]")]
+    [HttpPost]
     public async Task<IActionResult> CurrentUserDetails([FromBody] ApiCurrentUserDto curentUserDto)
     {
-        if (await IsUserAuthorized(curentUserDto)) return Unauthorized();
+        if (!await IsUserAuthorized(curentUserDto)) return Unauthorized();
         
-        var currentUser = await _signInManager.UserManager.FindByNameAsync(curentUserDto.Username);
+        var currentUser = await Context.Users
+            .Include(u => u.Client)
+            .Include(u => u.Address)
+            .FirstOrDefaultAsync(u => u.UserName == curentUserDto.Username);
         
         return Ok(new
         {
@@ -58,16 +60,7 @@ public class ApiUsersController : ControllerBase
             street = currentUser.Address?.Street,
             street_number = currentUser.Address?.StreetNumber,
             register_date = currentUser.RegisterDateTime.ToString("yyyy-MM-dd"),
-            account_type = currentUser.Client.IsPrivateAccount ? "Prywatne" : "Firmowe"
+            account_type = currentUser.Client.IsPrivateAccount ? "Konto prywatne" : "Konto firmowe"
         });
-    }
-    
-    private async Task<bool> IsUserAuthorized(ApiCurrentUserDto curentUserDto)
-    {
-        const string ACCESS_TOKEN = "temporary-token-12345";
-        var currentUserToken = curentUserDto.AccessToken;
-        var currentUser = await _signInManager.UserManager.FindByNameAsync(curentUserDto.Username);
-        
-        return currentUser != null && currentUserToken == ACCESS_TOKEN;
     }
 }

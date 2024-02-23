@@ -1,5 +1,8 @@
-﻿using FitnessAI.Application.Tickets.Commands.MarkTicketAsPaidCommand;
+﻿using FitnessAI.Application.Common.Interfaces;
+using FitnessAI.Application.Tickets.Commands.MarkTicketAsPaidCommand;
+using FitnessAI.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -9,6 +12,10 @@ namespace FitnessAI.WebUI.Controllers.Api;
 [ApiController]
 public class TicketApiController : BaseApiController
 {
+    public TicketApiController(SignInManager<ApplicationUser> signInManager, IApplicationDbContext context) : base(signInManager, context)
+    {
+    }
+    
     [Route("updatestatus")]
     [AllowAnonymous]
     public async Task<IActionResult> UpdateStatus(MarkTicketAsPaidCommand command)
