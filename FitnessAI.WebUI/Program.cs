@@ -76,7 +76,7 @@ if (app.Environment.IsDevelopment())
 else
     logger.LogInformation("PRODUCTION MODE!!!");
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
