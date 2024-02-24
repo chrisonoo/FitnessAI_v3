@@ -11,8 +11,11 @@ namespace FitnessAI.WebUI.Controllers.Api;
 [ApiController]
 public class ApiHomeController : BaseApiController
 {
-    public ApiHomeController(SignInManager<ApplicationUser> signInManager, IApplicationDbContext context) : base(
-        signInManager, context)
+    public ApiHomeController(
+        SignInManager<ApplicationUser> signInManager,
+        IApplicationDbContext context,
+        IDateTimeService dateTimeService)
+        : base(signInManager, context, dateTimeService)
     {
     }
 

@@ -12,7 +12,11 @@ namespace FitnessAI.WebUI.Controllers.Api;
 [ApiController]
 public class TicketApiController : BaseApiController
 {
-    public TicketApiController(SignInManager<ApplicationUser> signInManager, IApplicationDbContext context) : base(signInManager, context)
+    public TicketApiController(
+        SignInManager<ApplicationUser> signInManager,
+        IApplicationDbContext context,
+        IDateTimeService dateTimeService)
+        : base(signInManager, context, dateTimeService)
     {
     }
     

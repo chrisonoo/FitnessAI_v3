@@ -12,11 +12,16 @@ public abstract class BaseApiController : ControllerBase
     private ISender _mediator;
     protected readonly SignInManager<ApplicationUser> SignInManager;
     protected readonly IApplicationDbContext Context;
+    protected readonly IDateTimeService DateTimeService;
 
-    protected BaseApiController(SignInManager<ApplicationUser> signInManager, IApplicationDbContext context)
+    protected BaseApiController(
+        SignInManager<ApplicationUser> signInManager, 
+        IApplicationDbContext context,
+        IDateTimeService dateTimeService)
     {
         SignInManager = signInManager;
         Context = context;
+        DateTimeService = dateTimeService;
     }
     
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetService<ISender>();
