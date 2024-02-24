@@ -20,9 +20,9 @@ public partial class ProfilePage
         base.OnAppearing();
         await LoadDataAsync();
     }
-    
-    public async Task LoadDataAsync()
+
+    private async Task LoadDataAsync()
     {
-        BindingContext = await ApiService.CurrentUserDetails();
+        BindingContext = await ApiUserService.CurrentUserDetails();
     }
 }

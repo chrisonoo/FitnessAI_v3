@@ -11,7 +11,7 @@ public partial class LoginPage
 
     private async void BtnSignIn_Clicked(object? sender, EventArgs e)
     {
-        var response = await ApiService.Login(UsernameEntry.Text, PasswordEntry.Text);
+        var response = await ApiUserService.Login(UsernameEntry.Text, PasswordEntry.Text);
         
         if (response == 403)
             await DisplayAlert("Brak dostępu", "Uzupełnij swój profil w aplikacji webowej", "Ok");

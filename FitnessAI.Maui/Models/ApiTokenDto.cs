@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace FitnessAI.Maui.Models;
 
-public class TokenDto
+public class ApiTokenDto
 {
     [JsonProperty("access_token")]
     public string AccessToken { get; set; } = default!;

@@ -12,8 +12,8 @@ public static class UrlHelperExtensions
         try
         {
             var result = "active";
-            var controllerName = urlHelper.ActionContext.RouteData.Values["controller"].ToString();
-            var methodName = urlHelper.ActionContext.RouteData.Values["action"].ToString();
+            var controllerName = urlHelper.ActionContext.RouteData.Values["controller"]!.ToString();
+            var methodName = urlHelper.ActionContext.RouteData.Values["action"]!.ToString();
 
             if (string.IsNullOrEmpty(controllerName))
                 return null;
@@ -22,11 +22,11 @@ public static class UrlHelperExtensions
                 .ToList()
                 .Select(x => x.ToUpper());
 
-            if (action == null || !action.Any())
+            if (!action.Any())
                 return null;
 
             if (controllerName.Equals(controller, StringComparison.OrdinalIgnoreCase))
-                if (actions.Contains(methodName.ToUpper()))
+                if (actions.Contains(methodName!.ToUpper()))
                     return result;
 
             return null;

@@ -3,11 +3,13 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FitnessAI.Maui.Models"
+    x:DataType="local:ApiHomeDto"
     x:Class="FitnessAI.Maui.Pages.MainPage">
 
     <ContentPage.Content>
         <Grid
-            RowDefinitions="Auto,Auto,Auto"
+            RowDefinitions="Auto,Auto,Auto,Auto"
             RowSpacing="20"
             Margin="20">
 
@@ -43,8 +45,8 @@
                                         TextColor="White" />
                                     <Span
                                         Text="aktywny "
-                                        TextColor="White" 
-                                        FontAttributes="Bold"/>
+                                        TextColor="White"
+                                        FontAttributes="Bold" />
                                     <Span
                                         Text="karnet do:"
                                         TextColor="White" />
@@ -63,133 +65,31 @@
                             WidthRequest="30"
                             VerticalOptions="Center" />
                         <Label
-                            Text="2024-03-21"
-                            x:Name="LblActiveTo"
+                            Text="{Binding TicketEndDate,StringFormat='{0:dd.MM.yyyy}'}"
                             Padding="0"
                             VerticalOptions="Center"
-                            TextColor="White" 
-                            FontSize="Large"/>
+                            TextColor="White"
+                            FontSize="Large" />
+                        <Label
+                            x:Name="LblTicketDaysLeft"
+                            Padding="0"
+                            VerticalOptions="Center"
+                            TextColor="White"
+                            FontSize="Default" />
                     </HorizontalStackLayout>
                 </Grid>
             </Frame>
-            
-            <!-- Wiadomości od Administratora -->
-            
 
-            <!-- <Label Text="Categories" -->
-            <!--        Grid.Row="1" -->
-            <!--        FontSize="Large" /> -->
-            <!-- -->
-            <!-- ~1~ Categories @1@ -->
-            <!-- <CollectionView Grid.Row="2" -->
-            <!--                 x:Name="CvCategories" -->
-            <!--                 SelectionMode="Single" -->
-            <!--                 SelectionChanged="CvCategories_SelectionChanged"> -->
-            <!--      -->
-            <!--     <CollectionView.ItemsLayout> -->
-            <!--         <LinearItemsLayout ItemSpacing="30" -->
-            <!--                            Orientation="Horizontal" /> -->
-            <!--     </CollectionView.ItemsLayout> -->
-            <!--      -->
-            <!--     <CollectionView.ItemTemplate> -->
-            <!--         <DataTemplate -->
-            <!--             x:DataType="local:Category"> -->
-            <!--             <VerticalStackLayout> -->
-            <!--                 <Border StrokeShape="RoundRectangle 10"> -->
-            <!--                     <Image HeightRequest="90" -->
-            <!--                            WidthRequest="90"  -->
-            <!--                            Source="{Binding FullImageUrl}" /> -->
-            <!--                 </Border> -->
-            <!--                 <Label HorizontalOptions="Center" -->
-            <!--                        FontSize="Small"  -->
-            <!--                        Text="{Binding Name}"/> -->
-            <!--             </VerticalStackLayout> -->
-            <!--         </DataTemplate> -->
-            <!--     </CollectionView.ItemTemplate> -->
-            <!-- </CollectionView> -->
-            <!-- -->
-            <!-- ~1~ Best Selling @1@ -->
-            <!-- <CollectionView x:Name="CvBestSelling" -->
-            <!--                 Grid.Row="3" -->
-            <!--                 SelectionMode="Single" -->
-            <!--                 SelectionChanged="CvBestSelling_SelectionChanged"> -->
-            <!--     <CollectionView.ItemsLayout> -->
-            <!--         <LinearItemsLayout Orientation="Horizontal" -->
-            <!--                            ItemSpacing="10" /> -->
-            <!--     </CollectionView.ItemsLayout> -->
-            <!--     <CollectionView.ItemTemplate> -->
-            <!--         <DataTemplate -->
-            <!--             x:DataType="local:Product"> -->
-            <!--             <Border StrokeShape="RoundRectangle 10,10,10,10"> -->
-            <!--                 <Grid> -->
-            <!--                     <Image Aspect="Fill" -->
-            <!--                            HeightRequest="270" -->
-            <!--                            WidthRequest="320"  -->
-            <!--                            Source="{Binding FullImageUrl}"/> -->
-            <!-- -->
-            <!--                     <Label TextColor="White" -->
-            <!--                            FontSize="18" -->
-            <!--                            BackgroundColor="#80000000" -->
-            <!--                            Padding="10,5" -->
-            <!--                            VerticalOptions="End" -->
-            <!--                            HorizontalOptions="FillAndExpand"  -->
-            <!--                            Text="{Binding Name}"/> -->
-            <!--                 </Grid> -->
-            <!--             </Border> -->
-            <!--         </DataTemplate> -->
-            <!--     </CollectionView.ItemTemplate> -->
-            <!-- </CollectionView> -->
-            <!-- -->
-            <!-- <Label Grid.Row="4" -->
-            <!--        Text="Trending" -->
-            <!--        FontSize="Large" -->
-            <!--        VerticalOptions="Center" /> -->
-            <!-- -->
-            <!-- ~1~ Trending Products @1@ -->
-            <!-- <CollectionView Grid.Row="5" -->
-            <!--                 x:Name="CvTrending" -->
-            <!--                 SelectionMode="Single" -->
-            <!--                 SelectionChanged="CvTrending_SelectionChanged"> -->
-            <!--      -->
-            <!--     <CollectionView.ItemsLayout> -->
-            <!--         <LinearItemsLayout Orientation="Horizontal" -->
-            <!--                            ItemSpacing="10" /> -->
-            <!--     </CollectionView.ItemsLayout> -->
-            <!--      -->
-            <!--     <CollectionView.ItemTemplate> -->
-            <!--         <DataTemplate -->
-            <!--             x:DataType="local:Product"> -->
-            <!--             <Border VerticalOptions="Start" -->
-            <!--                     StrokeShape="RoundRectangle 10,10,10,10" -->
-            <!--                     Padding="10"> -->
-            <!--                 <Grid RowSpacing="5" -->
-            <!--                       RowDefinitions="Auto,Auto,Auto"> -->
-            <!-- -->
-            <!--                     <Border VerticalOptions="Start" -->
-            <!--                             StrokeShape="RoundRectangle 10,10,10,10"> -->
-            <!--                          -->
-            <!--                         ~1~ Product Image @1@ -->
-            <!--                         <Image Aspect="AspectFill" -->
-            <!--                                HeightRequest="140" -->
-            <!--                                WidthRequest="140"  -->
-            <!--                                Source="{Binding FullImageUrl}"/> -->
-            <!--                     </Border> -->
-            <!-- -->
-            <!--                     ~1~ Product Name @1@ -->
-            <!--                     <Label Grid.Row="1" -->
-            <!--                            FontAttributes="Bold" -->
-            <!--                            LineBreakMode="WordWrap" -->
-            <!--                            MaxLines="2"  -->
-            <!--                            Text="{Binding Name}"/> -->
-            <!-- -->
-            <!--                     ~1~ Product Price @1@ -->
-            <!--                     <Label Grid.Row="2"  -->
-            <!--                            Text="{Binding Price, StringFormat='{0:C}'}"/> -->
-            <!--                 </Grid> -->
-            <!--             </Border> -->
-            <!--         </DataTemplate> -->
-            <!--     </CollectionView.ItemTemplate> -->
-            <!-- </CollectionView> -->
+            <!-- Wiadomości od Administratora -->
+            <Label
+                Text="Najnowsze ogłoszenia"
+                Grid.Row="2"
+                FontSize="Large" />
+
+            <Grid
+                Grid.Row="3"
+                x:Name="AnnouncementsGrid"
+                ColumnDefinitions="Auto, *" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

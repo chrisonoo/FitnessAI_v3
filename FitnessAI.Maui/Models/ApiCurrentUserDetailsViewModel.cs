@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace FitnessAI.Maui.Models;
 
-public class CurrentUserDetailsViewModel
+public class ApiCurrentUserDetailsViewModel
 {
     [JsonProperty("first_name")]
     public string FirstName { get; set; } = default!;
