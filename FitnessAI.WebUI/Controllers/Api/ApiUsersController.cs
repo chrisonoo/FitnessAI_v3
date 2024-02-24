@@ -35,7 +35,9 @@ public class ApiUsersController : BaseApiController
         {
             access_token = ACCESS_TOKEN,
             user_id = currentUser.Id,
-            user_name = currentUser.UserName
+            user_name = currentUser.UserName,
+            first_name = currentUser.FirstName,
+            last_name = currentUser.LastName
         });
     }
     

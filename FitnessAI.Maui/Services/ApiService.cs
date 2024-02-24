@@ -28,6 +28,8 @@ public static class ApiService
         Preferences.Set("access_token", result!.AccessToken);
         Preferences.Set("user_id", result.UserId);
         Preferences.Set("user_name", result.UserName);
+        Preferences.Set("first_name", result.FirstName);
+        Preferences.Set("last_name", result.LastName);
 
         return (int)response.StatusCode;
     }

@@ -12,4 +12,10 @@ public class TokenDto
 
     [JsonProperty("user_name")]
     public string UserName { get; set; } = default!;
+    
+    [JsonProperty("first_name")]
+    public string FirstName { get; set; } = default!;
+    
+    [JsonProperty("last_name")]
+    public string LastName { get; set; } = default!;
 }
