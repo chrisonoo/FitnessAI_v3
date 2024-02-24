@@ -7,10 +7,11 @@
 
     <ContentPage.Content>
         <Grid
-            RowDefinitions="Auto,Auto,Auto,3*,Auto,4*"
+            RowDefinitions="Auto,Auto,Auto"
             RowSpacing="20"
             Margin="20">
 
+            <!-- Powitanie -->
             <VerticalStackLayout
                 Grid.Row="0"
                 Spacing="5">
@@ -18,9 +19,62 @@
                     x:Name="LblUserName"
                     FontSize="Large" />
                 <Label
-                    Text="Witaj w FitnessAI... Zaczynamy 💪"
+                    Text="Witaj w Fitness AI... Zaczynamy 💪"
                     FontSize="Subtitle" />
             </VerticalStackLayout>
+
+            <!-- Informacja o ważności karnetu -->
+            <Frame
+                Grid.Row="1"
+                Padding="10"
+                BorderColor="Transparent"
+                BackgroundColor="Gray">
+                <Grid
+                    ColumnDefinitions="3*,5*">
+                    <Label
+                        Grid.Column="0"
+                        TextColor="White"
+                        Margin="10,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span
+                                        Text="Masz "
+                                        TextColor="White" />
+                                    <Span
+                                        Text="aktywny "
+                                        TextColor="White" 
+                                        FontAttributes="Bold"/>
+                                    <Span
+                                        Text="karnet do:"
+                                        TextColor="White" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <HorizontalStackLayout
+                        HorizontalOptions="End"
+                        Margin="0,0,10,0"
+                        Grid.Column="1"
+                        Spacing="10">
+                        <Image
+                            Source="active"
+                            HeightRequest="30"
+                            WidthRequest="30"
+                            VerticalOptions="Center" />
+                        <Label
+                            Text="2024-03-21"
+                            x:Name="LblActiveTo"
+                            Padding="0"
+                            VerticalOptions="Center"
+                            TextColor="White" 
+                            FontSize="Large"/>
+                    </HorizontalStackLayout>
+                </Grid>
+            </Frame>
+            
+            <!-- Wiadomości od Administratora -->
+            
 
             <!-- <Label Text="Categories" -->
             <!--        Grid.Row="1" -->

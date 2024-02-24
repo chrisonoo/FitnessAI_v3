@@ -10,7 +10,7 @@
     <ContentPage.Content>
 
         <Grid
-            RowDefinitions="Auto,5*,1*"
+            RowDefinitions="Auto,5*,Auto"
             RowSpacing="0">
 
             <VerticalStackLayout
@@ -92,10 +92,11 @@
             <Button
                 Grid.Row="2"
                 Text="Wyloguj"
-                FontSize="Medium"
-                HorizontalOptions="Center"
-                BackgroundColor="Transparent"
-                TextColor="Red"
+                HorizontalOptions="FillAndExpand"
+                Margin="20"
+                BackgroundColor="Red"
+                TextColor="White"
+                FontAttributes="Bold"
                 x:Name="BtnLogout"
                 Clicked="BtnLogout_OnClicked" />
         </Grid>

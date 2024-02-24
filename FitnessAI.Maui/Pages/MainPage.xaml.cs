@@ -9,5 +9,6 @@ public partial class MainPage
             = "Cześć, "
               + Preferences.Get("first_name", string.Empty) + " "
               + Preferences.Get("last_name", string.Empty) + "!";
+        
     }
 }
