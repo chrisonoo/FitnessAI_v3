@@ -37,8 +37,16 @@ public class ApiTicketsController : BaseApiController
             TicketId = clientActiveTicket!.Id, UserId = currentUser.Id
         });
 
-
-        var result = new { };
+        var result = new
+        {
+            company_contact_email = clientActivePrintTicket.CompanyContactEmail,
+            company_contact_phone = clientActivePrintTicket.CompanyContactPhone,
+            end_date = clientActivePrintTicket.EndDate,
+            full_name = clientActivePrintTicket.FullName,
+            image_url = clientActivePrintTicket.Image,
+            start_date = clientActivePrintTicket.StartDate,
+            qr_code = clientActivePrintTicket.QrCodeId,
+        };
         return Ok(result);
     }
 }

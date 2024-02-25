@@ -2,14 +2,109 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FitnessAI.Maui.Models"
+             x:DataType="local:ApiClientActivePrintTicketViewModel"
              x:Class="FitnessAI.Maui.Pages.TicketPage">
+
     <ContentPage.Content>
-        
-        <Label 
-            Text="Ticket Page" 
-            FontSize="Large"
-            HorizontalOptions="Center" 
-            VerticalOptions="CenterAndExpand" />
-        
+
+        <Grid
+            RowDefinitions="Auto,*,Auto"
+            RowSpacing="20">
+
+            <!-- Logo -->
+            <Image
+                Grid.Row="0"
+                Source="{Binding FullImageUrl}"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                Margin="60,30,60,0" />
+            
+            <!-- Dane karnetu -->
+            <VerticalStackLayout
+                Grid.Row="1"
+                Margin="20"
+                Spacing="20">
+
+                <!-- Użytkownik -->
+                <HorizontalStackLayout
+                    Spacing="10">
+                    <Image
+                        Source="user"
+                        HeightRequest="25" />
+                    <Label
+                        Text="Użytkownik"
+                        FontSize="Default" />
+                </HorizontalStackLayout>
+                <Label
+                    Text="{Binding FullName}"
+                    FontSize="Medium" />
+                <Border
+                    HeightRequest="1"
+                    BackgroundColor="Gray" />
+
+                <!-- Ważny od: -->
+                <HorizontalStackLayout
+                    Spacing="10">
+                    <Image
+                        Source="from"
+                        HeightRequest="25" />
+                    <Label
+                        Text="Ważny Od"
+                        FontSize="Default" />
+                </HorizontalStackLayout>
+                <Label
+                    Text="{Binding StartDate, StringFormat='{0:dd.MM.yyyy}'}"
+                    FontSize="Medium" />
+                <Border
+                    HeightRequest="1"
+                    BackgroundColor="Gray" />
+
+                <!-- Ważny do: -->
+                <HorizontalStackLayout
+                    Spacing="10">
+                    <Image
+                        Source="to"
+                        HeightRequest="25" />
+                    <Label
+                        Text="Ważny Do"
+                        FontSize="Default" />
+                </HorizontalStackLayout>
+                <Label
+                    Text="{Binding EndDate, StringFormat='{0:dd.MM.yyyy}'}"
+                    FontSize="Medium" />
+                <Border
+                    HeightRequest="1"
+                    BackgroundColor="Gray" />
+
+                <!-- Dział obsługi -->
+                <HorizontalStackLayout
+                    Spacing="10">
+                    <Image
+                        Source="info"
+                        HeightRequest="25" />
+                    <Label
+                        Text="Dział Obsługi"
+                        FontSize="Default" />
+                </HorizontalStackLayout>
+                <Label
+                    Text="{Binding FullPhone}"
+                    FontSize="Medium" />
+                <Label
+                    Text="{Binding FullEmail}"
+                    FontSize="Medium" />
+            </VerticalStackLayout>
+
+            <Button
+                Grid.Row="2"
+                Text="Pokaż kod QR"
+                HorizontalOptions="Fill"
+                Margin="20"
+                BackgroundColor="#314fa8"
+                TextColor="White"
+                FontAttributes="Bold"
+                Clicked="BtnShowQr_OnClicked" />
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>
