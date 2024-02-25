@@ -20,8 +20,8 @@ public partial class TicketPage
         BindingContext = await ApiTicketService.ActiveTicket();
     }
 
-    private void BtnShowQr_OnClicked(object? sender, EventArgs e)
+    private async void BtnShowQr_OnClicked(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        await Shell.Current.GoToAsync($"{nameof(QrCodePage)}");
     }
 }

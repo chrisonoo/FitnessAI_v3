@@ -21,7 +21,8 @@ public class ApiTicketService : ApiBaseService
         var jsonResult = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<ApiClientActivePrintTicketViewModel>(jsonResult);
 
-        Preferences.Set("qr_code", result!.QrCode);
+        var qrCode = result!.QrCode;
+        Preferences.Set("qr_code", qrCode);
         
         return result;
     }
