@@ -1,10 +1,8 @@
 using FitnessAI.Application.Common.Interfaces;
-using FitnessAI.Application.Tickets.Queries.GetPrintTicket;
 using FitnessAI.Domain.Entities;
 using FitnessAI.WebUI.Models.Api;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace FitnessAI.WebUI.Controllers.Api;
 
@@ -19,7 +17,7 @@ public class ApiWorkoutsController : BaseApiController
         : base(signInManager, context, dateTimeService)
     {
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Workouts([FromBody] ApiCurrentUserDto curentUserDto)
     {
@@ -37,10 +35,7 @@ public class ApiWorkoutsController : BaseApiController
         //     TicketId = clientActiveTicket!.Id, UserId = currentUser.Id
         // });
 
-        var result = new
-        {
-            test_string = "Workouts test text"
-        };
+        var result = new { test_string = "Workouts test text" };
         return Ok(result);
     }
 }
