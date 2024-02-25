@@ -22,4 +22,10 @@ public partial class LoginPage
         else
             Application.Current!.MainPage = new AppShell();
     }
+    
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        ImgLogoFitnessAi.Source = $"({AppSettings.ApiUrl})/images/gym-logo.jpg";
+    }
 }
