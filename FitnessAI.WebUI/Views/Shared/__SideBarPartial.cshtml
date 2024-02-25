@@ -31,6 +31,13 @@
         Informacje
     </div>
 
+    <li class="nav-item @Url.MakeActiveClass("Exercise", "Exercises")">
+        <a asp-controller="Exercise" asp-action="Exercises" class="nav-link">
+            <i class="fas fa-solid fa-square-check"></i>
+            <span>Ćwiczenia</span>
+        </a>
+    </li>
+
     <li class="nav-item @Url.MakeActiveClass("Workout", "Workouts")">
         <a asp-controller="Workout" asp-action="Workouts" class="nav-link">
             <i class="fas fa-solid fa-square-check"></i>
