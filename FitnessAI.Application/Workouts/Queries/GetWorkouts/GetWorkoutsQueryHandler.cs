@@ -4,8 +4,10 @@ namespace FitnessAI.Application.Workouts.Queries.GetWorkouts;
 
 public class GetWorkoutsQueryHandler : IRequestHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>>
 {
-    public Task<IEnumerable<WorkoutDto>> Handle(GetWorkoutsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<WorkoutDto>> Handle(GetWorkoutsQuery request, CancellationToken cancellationToken)
     {
-        return new Task<IEnumerable<WorkoutDto>>(() => new List<WorkoutDto>());
+        await Task.CompletedTask;
+        var result = new List<WorkoutDto>();
+        return result;
     }
 }
