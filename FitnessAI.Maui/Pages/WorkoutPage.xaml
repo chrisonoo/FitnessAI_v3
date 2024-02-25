@@ -2,11 +2,14 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FitnessAI.Maui.Models"
+             x:DataType="local:ApiWorkoutsViewModel"
              x:Class="FitnessAI.Maui.Pages.WorkoutPage">
+    
     <ContentPage.Content>
         
             <Label 
-                Text="Workout Page" 
+                Text="{Binding TestString}" 
                 FontSize="Large"
                 HorizontalOptions="Center" 
                 VerticalOptions="CenterAndExpand" />
