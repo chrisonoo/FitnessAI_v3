@@ -7,21 +7,21 @@
 
     <ContentPage.Content>
         <Grid
-            RowDefinitions="Auto,Auto,Auto,Auto,*"
+            RowDefinitions="*,Auto,*,Auto,Auto,Auto,2*"
             RowSpacing="20"
-            Margin="20,150,20,40">
+            Margin="20,0,20,0">
             <Image
-                Grid.Row="0"
+                Grid.Row="1"
                 x:Name="ImgLogoFitnessAi"
                 Aspect="AspectFit"
-                HorizontalOptions="Center"
-                Margin="60,30,60,60" />
+                VerticalOptions="Start"
+                Margin="60,0" />
             <Label
-                Grid.Row="1"
+                Grid.Row="3"
                 Text="Witaj w Fitness AI"
                 HorizontalOptions="Center" />
             <Frame
-                Grid.Row="2"
+                Grid.Row="4"
                 Padding="15"
                 BackgroundColor="White">
                 <VerticalStackLayout>
@@ -37,9 +37,11 @@
             </Frame>
 
             <Button
-                Grid.Row="3"
-                Text="Zaloguj się do Fitness AI"
+                Grid.Row="5"
                 x:Name="BtnSignIn"
+                Text="Zaloguj się do Fitness AI"
+                Margin="40"
+                BackgroundColor="#314fa8"
                 Clicked="BtnSignIn_Clicked" />
         </Grid>
     </ContentPage.Content>

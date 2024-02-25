@@ -26,6 +26,7 @@ public partial class LoginPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ImgLogoFitnessAi.Source = $"({AppSettings.ApiUrl})/images/gym-logo.jpg";
+        var fullImageUrl = $"{AppSettings.ApiUrl}/images/gym-logo.jpg";
+        ImgLogoFitnessAi.Source = fullImageUrl;
     }
 }

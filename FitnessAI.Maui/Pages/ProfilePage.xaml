@@ -93,7 +93,7 @@
                 Grid.Row="2"
                 Text="Wyloguj"
                 HorizontalOptions="FillAndExpand"
-                Margin="20"
+                Margin="60,40"
                 BackgroundColor="Red"
                 TextColor="White"
                 FontAttributes="Bold"
