@@ -31,6 +31,13 @@
         Informacje
     </div>
 
+    <li class="nav-item @Url.MakeActiveClass("Workout", "Workouts")">
+        <a asp-controller="Workout" asp-action="Workouts" class="nav-link">
+            <i class="fas fa-solid fa-square-check"></i>
+            <span>Treningi</span>
+        </a>
+    </li>
+
     <!-- Nav Item -->
     <li class="nav-item @Url.MakeActiveClass("Ticket", "Tickets,AddTicket")">
         <a asp-controller="Ticket" asp-action="Tickets" class="nav-link">
@@ -48,15 +55,15 @@
     </li>
 
     @if (User.IsInRole(RolesDict.ADMINISTRATOR) || User.IsInRole(RolesDict.PRACOWNIK))
-    {    
+    {
         <!-- Divider -->
-         <hr class="sidebar-divider">
-     
-         <!-- Heading -->
-         <div class="sidebar-heading">
-             Admin
-         </div>
-         
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Admin
+        </div>
+
         <!-- Nav Item -->
         <li class="nav-item @Url.MakeActiveClass("Client", "Clients,AddClient,EditAdminClient")">
             <a asp-controller="Client" asp-action="Clients" class="nav-link">
@@ -83,7 +90,7 @@
                 <span>Pracownicy</span>
             </a>
         </li>
-        
+
         <!-- Nav Item -->
         <li class="nav-item @Url.MakeActiveClass("Role", "Roles,AddRole,EditRole")">
             <a asp-controller="Role" asp-action="Roles" class="nav-link">
@@ -91,14 +98,14 @@
                 <span>Role</span>
             </a>
         </li>
-        
+
         <!-- Nav Item -->
         <li class="nav-item @Url.MakeActiveClass("File", "Files")">
             <a asp-controller="File" asp-action="Files" class="nav-link">
                 <i class="fas fa-solid fa-unlock-keyhole"></i>
                 <span>Pliki</span>
             </a>
-        </li> 
+        </li>
 
         <!-- Nav Item - Collapse Menu -->
         <li class="nav-item @Url.MakeActiveClass("Settings", "Settings")">
