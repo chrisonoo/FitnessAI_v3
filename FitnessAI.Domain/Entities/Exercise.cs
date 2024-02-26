@@ -1,9 +1,18 @@
-namespace FitnessAI.Application.Exercises.Queries.GetExercises;
+using System.ComponentModel.DataAnnotations;
 
-public class ExerciseDto
+namespace FitnessAI.Domain.Entities;
+
+public class Exercise
 {
+    [Key]
     public int Id { get; set; }
+
+    [Required]
     public string Title { get; set; }
+
+    [Required]
+    public string Category { get; set; }
+
     public string Description { get; set; }
     public string WorkoutInstruction { get; set; }
     public string BeginnerLoad { get; set; }
@@ -11,4 +20,6 @@ public class ExerciseDto
     public string AdvancedLoad { get; set; }
     public string ImageUrl { get; set; }
     public string MultimediaUrl { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public bool IsActive { get; set; }
 }

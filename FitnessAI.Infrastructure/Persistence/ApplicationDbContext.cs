@@ -26,6 +26,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Announcement> Announcements { get; set; }
     public DbSet<Language> Languages { get; set; }
     public DbSet<TicketTypeTranslation> TicketTypeTranslations { get; set; }
+    public DbSet<Exercise> Exercises { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,6 +39,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         modelBuilder.SeedSettingsPosition();
         modelBuilder.SeedRoles();
         modelBuilder.SeedAnnouncement();
+        modelBuilder.SeedExercise();
 
         base.OnModelCreating(modelBuilder);
     }
