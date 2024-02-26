@@ -31,6 +31,7 @@
         Informacje
     </div>
 
+    <!-- Nav Item -->
     <li class="nav-item @Url.MakeActiveClass("Exercise", "Exercises")">
         <a asp-controller="Exercise" asp-action="Exercises" class="nav-link">
             <i class="fas fa-solid fa-square-check"></i>
@@ -38,17 +39,26 @@
         </a>
     </li>
 
+    <!-- Nav Item -->
     <li class="nav-item @Url.MakeActiveClass("Workout", "Workouts")">
         <a asp-controller="Workout" asp-action="Workouts" class="nav-link">
-            <i class="fas fa-solid fa-square-check"></i>
+            <i class="fas fa-solid fa-rectangle-list"></i>
             <span>Treningi</span>
+        </a>
+    </li>
+
+    <!-- Nav Item -->
+    <li class="nav-item @Url.MakeActiveClass("WorkoutCalendar", "WorkoutsCalendar")">
+        <a asp-controller="WorkoutCalendar" asp-action="WorkoutsCalendar" class="nav-link">
+            <i class="fas fa-solid fa-calendar-days"></i>
+            <span>Kalendarz</span>
         </a>
     </li>
 
     <!-- Nav Item -->
     <li class="nav-item @Url.MakeActiveClass("Ticket", "Tickets,AddTicket")">
         <a asp-controller="Ticket" asp-action="Tickets" class="nav-link">
-            <i class="fas fa-solid fa-calendar-check"></i>
+            <i class="fas fa-solid fa-qrcode"></i>
             <span>Karnety</span>
         </a>
     </li>
