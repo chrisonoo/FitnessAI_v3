@@ -77,16 +77,16 @@
             instructionElement.html(insertBreaks(instructionElement.html()));
              
             $('.active-exercise-check').change(function () {
-                let isSelected = $(this).is(':checked');
+                let userName = '@Model.ActiveUserName';
                 let exerciseId = $(this).data('exercise-id');
         
                 let data = {
-                    isSelected,
+                    userName, 
                     exerciseId
                 };
         
                 $.ajax({
-                    url: '/api/question/updateinactive',
+                    url: '/api/exerciseapi/updateuserexerciseselection',
                     type: 'POST',
                     contentType: 'application/json',
                     dataType: 'json',

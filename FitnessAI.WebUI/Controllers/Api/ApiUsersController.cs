@@ -22,8 +22,6 @@ public class ApiUsersController : BaseApiController
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] ApiUserLoginDto userLoginDto)
     {
-        const string ACCESS_TOKEN = "temporary-token-12345";
-
         var result = await SignInManager.PasswordSignInAsync(
             userLoginDto.Username ?? string.Empty,
             userLoginDto.Password ?? string.Empty,
