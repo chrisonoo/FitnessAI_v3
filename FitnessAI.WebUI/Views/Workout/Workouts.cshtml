@@ -1,9 +1,135 @@
-@using FitnessAI.Application.Workouts.Queries.GetWorkouts
-@model IEnumerable<WorkoutDto>
+@model IEnumerable<FitnessAI.Application.Workouts.Queries.GetWorkouts.WorkoutDto>
 
 @{
     ViewBag.Title = "Treningi";
 }
 
-<h2>@Model</h2>
+<div class="container">
+    <div class="d-flex gap-3 border p-3 bg-white">
+        <div id="workouts-list" class="flex-fill bg-white border">
+            <h2 class="text-center m-2">Treningi</h2>
+            <div class="border m-3 p-4">
+                <div class="text-center mb-3">
+                    <h5>Wybierz trening, dodaj ćwiczenia</h5>
+                </div>
 
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <td>
+                            Trening na klatę nr 1
+                        </td>
+                        <td>
+                            <i class="fas fa-solid fa-pen-to-square"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Trening na klatę nr 2
+                        </td>
+                        <td>
+                            <i class="fas fa-solid fa-pen-to-square"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Trening aerobowy do maratonu
+                        </td>
+                        <td>
+                            <i class="fas fa-solid fa-pen-to-square"></i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="text-center mt-5">
+                    <a
+                        asp-controller="Client"
+                        asp-action="EditClient"
+                        class="btn btn-primary mx-5"
+                        role="button">
+                        <i class="fas fa-solid fa-circle-plus me-2"></i>Zaplanuj nowy trening
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="exercises-list" class="flex-fill bg-white border">
+            <h2 class="text-center m-2">Ćwiczenia</h2>
+            <div class="border m-3 p-4">
+                <div class="text-center mb-3">
+                    <h5>Nazwa wybranego treningu</h5>
+                </div>
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-check form-switch ms-4">
+                                <input
+                                    @* id="active-@Model.Exercise.Id" *@
+                                    id="active1"
+                                    class="form-check-input active-exercise-check"
+                                    type="checkbox" role="switch"
+                                    autocomplete="off"
+                                    @* data-exercise-id="@Model.Exercise.Id" *@
+                                    @* @(Model.IsSelectedForActiveUser ? "checked" : "") *@>
+                                <label
+                                    for="active1"
+                                    class="form-check-label ms-3">
+                                    Dodaj do moich treningów
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            Kalistenika
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check form-switch ms-4">
+                                <input
+                                    @* id="active-@Model.Exercise.Id" *@
+                                    id="active2"
+                                    class="form-check-input active-exercise-check"
+                                    type="checkbox" role="switch"
+                                    autocomplete="off"
+                                    @* data-exercise-id="@Model.Exercise.Id" *@
+                                    @* @(Model.IsSelectedForActiveUser ? "checked" : "") *@>
+                                <label
+                                    for="active2"
+                                    class="form-check-label ms-3">
+                                    Dodaj do moich treningów
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            Ćwiczenia z obciążeniem
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check form-switch ms-4">
+                                <input
+                                    @* id="active-@Model.Exercise.Id" *@
+                                    id="active3"
+                                    class="form-check-input active-exercise-check"
+                                    type="checkbox" role="switch"
+                                    autocomplete="off"
+                                    @* data-exercise-id="@Model.Exercise.Id" *@
+                                    @* @(Model.IsSelectedForActiveUser ? "checked" : "") *@>
+                                <label
+                                    for="active3"
+                                    class="form-check-label ms-3">
+                                    Dodaj do moich treningów
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            Aeroby
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
