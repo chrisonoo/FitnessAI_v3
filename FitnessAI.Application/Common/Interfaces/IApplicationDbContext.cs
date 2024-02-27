@@ -21,6 +21,7 @@ public interface IApplicationDbContext : IDisposable
     DbSet<ApplicationUser> Users { get; set; }
     DbSet<Exercise> Exercises { get; set; }
     DbSet<UserExercise> UserExercises { get; set; }
+    DbSet<Workout> Workouts { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
