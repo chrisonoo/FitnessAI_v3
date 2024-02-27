@@ -18,7 +18,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Ułóż się na podłodze, opierając się na dłoniach i palcach stóp. 2. Wykonaj pompkę, opuszczając ciało do momentu, gdy klatka dotknie podłogi. 3. Wróć do pozycji wyjściowej.",
                 BeginnerLoad = "3x10",
-                IntermidiateLoad = "3x15",
+                IntermediateLoad = "3x15",
                 AdvancedLoad = "3x20",
                 ImageUrl = "/images/exercise/pompki.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=baCcDGahK-g",
@@ -34,7 +34,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Stań prosto z nogami na szerokość barków. 2. Zginaj kolana, opuszczając ciało jak gdybyś chciał usiąść na niewidzialnym krześle. 3. Wróć do pozycji wyjściowej.",
                 BeginnerLoad = "3x10",
-                IntermidiateLoad = "3x15",
+                IntermediateLoad = "3x15",
                 AdvancedLoad = "3x20",
                 ImageUrl = "/images/exercise/przysiady.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=gC2JDbEuwOI",
@@ -51,7 +51,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Stań przy sztandze tak, by gryf znajdował się nad środkiem stóp. 2. Schyl się i chwyć sztangę. 3. Podnieś sztangę do góry, prostując nogi i plecy. 4. Opuszczaj sztangę kontrolowanym ruchem.",
                 BeginnerLoad = "3x8",
-                IntermidiateLoad = "3x10",
+                IntermediateLoad = "3x10",
                 AdvancedLoad = "3x12",
                 ImageUrl = "/images/exercise/martwy_ciag.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=0_igODjLiXM",
@@ -68,7 +68,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Rozpocznij od rozgrzewki. 2. Biegaj w umiarkowanym tempie przez wybrany czas lub dystans. 3. Zakończ ćwiczenie chłodzeniem.",
                 BeginnerLoad = "30 min",
-                IntermidiateLoad = "45 min",
+                IntermediateLoad = "45 min",
                 AdvancedLoad = "60 min",
                 ImageUrl = "/images/exercise/bieganie.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=PoTl0NK1Qvw",
@@ -85,7 +85,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Stań prosto trzymając skakankę. 2. Skacz, obracając skakankę pod stopami. 3. Utrzymuj równomierny rytm.",
                 BeginnerLoad = "10 min",
-                IntermidiateLoad = "15 min",
+                IntermediateLoad = "15 min",
                 AdvancedLoad = "20 min",
                 ImageUrl = "/images/exercise/skakanka.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=Depy5QLMAyg",
@@ -102,7 +102,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Połóż się na ławce poziomej. 2. Chwyć sztangę na szerokość barków. 3. Opuszczaj sztangę do klatki piersiowej. 4. Wyciskaj do pełnego wyprostu ramion.",
                 BeginnerLoad = "3x8",
-                IntermidiateLoad = "3x10",
+                IntermediateLoad = "3x10",
                 AdvancedLoad = "3x12",
                 ImageUrl = "/images/exercise/wyciskanie_sztangi.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=8_33og5lN-Y",
@@ -119,7 +119,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Chwyć drążek nachwytem na szerokość barków. 2. Podciągnij ciało, aż broda znajdzie się nad drążkiem. 3. Opuszczaj ciało kontrolowanie do pozycji wyjściowej.",
                 BeginnerLoad = "3x6",
-                IntermidiateLoad = "3x8",
+                IntermediateLoad = "3x8",
                 AdvancedLoad = "3x10",
                 ImageUrl = "/images/exercise/podciaganie_na_drazku.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=jxQ6lKiVfuo",
@@ -135,7 +135,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Stań w lekkim rozkroku, trzymając sztangę. 2. Schyl się w pasie, trzymając plecy prosto. 3. Ciągnij sztangę do dolnej części brzucha. 4. Opuszczaj sztangę kontrolowanie.",
                 BeginnerLoad = "3x8",
-                IntermidiateLoad = "3x10",
+                IntermediateLoad = "3x10",
                 AdvancedLoad = "3x12",
                 ImageUrl = "/images/exercise/wioslowanie_sztanga.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=MOlDmANU_4U",
@@ -153,7 +153,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Połóż się na ławce poziomej z hantlą w każdej ręce. 2. Wyciskaj hantle do góry, aż ręce będą w pełnym wyproście. 3. Opuszczaj hantle do poziomu klatki piersiowej.",
                 BeginnerLoad = "3x8",
-                IntermidiateLoad = "3x10",
+                IntermediateLoad = "3x10",
                 AdvancedLoad = "3x12",
                 ImageUrl = "/images/exercise/wyciskanie_hantli.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=ACsYCmLA9Do",
@@ -170,7 +170,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Siądź na ławce z hantlą trzymaną oburącz za głową. 2. Prostuj ramiona, unosząc ciężar nad głowę. 3. Powoli opuszczaj ciężar za głowę.",
                 BeginnerLoad = "3x10",
-                IntermidiateLoad = "3x12",
+                IntermediateLoad = "3x12",
                 AdvancedLoad = "3x15",
                 ImageUrl = "/images/exercise/prostowanie_ramion_w_siadzie.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=mJf7Q8_nJMk",
@@ -186,7 +186,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Stań prosto, trzymając sztangę chwytem podchwytem. 2. Uginaj ramiona, podnosząc sztangę do barków. 3. Powoli opuszczaj sztangę do pozycji wyjściowej.",
                 BeginnerLoad = "3x10",
-                IntermidiateLoad = "3x12",
+                IntermediateLoad = "3x12",
                 AdvancedLoad = "3x15",
                 ImageUrl = "/images/exercise/uginanie_ramion_ze_sztanga.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=wHbgdQ5rS7g",
@@ -202,7 +202,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Stań prosto, trzymając sztangielkę w każdej ręce. 2. Uginaj ramiona na przemian, podnosząc sztangielki do barków. 3. Powoli opuszczaj sztangielki.",
                 BeginnerLoad = "3x10",
-                IntermidiateLoad = "3x12",
+                IntermediateLoad = "3x12",
                 AdvancedLoad = "3x15",
                 ImageUrl = "/images/exercise/uginanie_ramion_ze_sztangielkami.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=0gHGJwOJqVw",
@@ -219,7 +219,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Usiądź na maszynie do wyciskania. 2. Chwyć uchwyty na wysokości klatki piersiowej. 3. Wyciskaj ręce do przodu. 4. Powoli wracaj do pozycji wyjściowej.",
                 BeginnerLoad = "3x10",
-                IntermidiateLoad = "3x12",
+                IntermediateLoad = "3x12",
                 AdvancedLoad = "3x15",
                 ImageUrl = "/images/exercise/wyciskanie_na_maszynie.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=DgasTNLyQcg",
@@ -235,7 +235,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Usiądź na maszynie do prostowania nóg. 2. Umieść podudzia pod wałek. 3. Prostuj nogi, unosząc wałek. 4. Powoli opuszczaj wałek.",
                 BeginnerLoad = "3x10",
-                IntermidiateLoad = "3x12",
+                IntermediateLoad = "3x12",
                 AdvancedLoad = "3x15",
                 ImageUrl = "/images/exercise/prostowanie_nog_na_maszynie.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=aTs1YmgK5m8",
@@ -251,7 +251,7 @@ internal static class ModelBuilderExtensionsExercise
                 WorkoutInstruction =
                     "1. Połóż się na brzuchu na maszynie do uginania nóg. 2. Uginaj nogi w kolanach, przyciągając wałek do pośladków. 3. Powoli opuszczaj wałek.",
                 BeginnerLoad = "3x10",
-                IntermidiateLoad = "3x12",
+                IntermediateLoad = "3x12",
                 AdvancedLoad = "3x15",
                 ImageUrl = "/images/exercise/uginanie_nog_na_maszynie.png",
                 MultimediaUrl = "https://www.youtube.com/watch?v=ZAkgAX2lcZk",

@@ -23,10 +23,11 @@ public class GetExercisesQuteryHandler: IRequestHandler<GetExercisesQuery, IEnum
             {
                 Id = x.Id,
                 Title = x.Title,
+                Category = x.Category,
                 Description = x.Description,
                 WorkoutInstruction = x.WorkoutInstruction,
                 BeginnerLoad = x.BeginnerLoad,
-                IntermidiateLoad = x.IntermidiateLoad,
+                IntermediateLoad = x.IntermediateLoad,
                 AdvancedLoad = x.AdvancedLoad,
                 ImageUrl = x.ImageUrl,
                 MultimediaUrl = x.MultimediaUrl

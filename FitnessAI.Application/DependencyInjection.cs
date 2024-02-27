@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using FitnessAI.Application.Common.Behaviours;
+using FitnessAI.Application.Exercises.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,8 @@ public static class DependencyInjection
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+
+        services.AddScoped<IExerciseNavigationService, ExerciseNavigationService>();
 
         return services;
     }
