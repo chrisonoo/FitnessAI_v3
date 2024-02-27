@@ -19,8 +19,4 @@
         <ProjectReference Include="..\FitnessAI.Domain\FitnessAI.Domain.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Workouts\Commands\" />
-    </ItemGroup>
-
 </Project>

@@ -1,4 +1,5 @@
 using FitnessAI.Application.Dictionaries;
+using FitnessAI.Application.Workouts.Commands.EditWorkout;
 using FitnessAI.Application.Workouts.Queries.GetWorkouts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,9 @@ public class WorkoutController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> EditWorkoutTitle(string workoutTitle, string workoutId)
+    public async Task<IActionResult> EditWorkoutTitle(string workoutTitle, int workoutId)
     {
+        var result = await Mediator.Send(new EditWorkoutCommand{WorkoutTitle = workoutTitle, WorkoutId = workoutId});
         
         return RedirectToAction(nameof(Workouts));
     }
