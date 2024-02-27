@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="d-flex gap-3 border p-3 bg-white">
-        <div id="workouts-list" class="flex-fill bg-white border">
+        <div id="workouts-list" class="flex-fill bg-white border" style="width: 45%">
             <h2 class="text-center m-2">Treningi</h2>
             <div class="border m-3 p-4">
                 <div class="text-center mb-3">
@@ -15,30 +15,33 @@
 
                 <table class="table table-hover">
                     <tbody>
-                    <tr>
-                        <td>
-                            Trening na klatę nr 1
-                        </td>
-                        <td>
-                            <i class="fas fa-solid fa-pen-to-square"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Trening na klatę nr 2
-                        </td>
-                        <td>
-                            <i class="fas fa-solid fa-pen-to-square"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Trening aerobowy do maratonu
-                        </td>
-                        <td>
-                            <i class="fas fa-solid fa-pen-to-square"></i>
-                        </td>
-                    </tr>
+                    @foreach (var workout in Model)
+                    {
+                        <tr>
+                            <td id="workout-title-@workout.Id">
+                                @workout.Title
+                            </td>
+                            <td>
+                                <a 
+                                    href="#" 
+                                    data-toggle="modal" 
+                                    data-target="#editWorkoutModal" 
+                                    data-workout-id="@workout.Id"
+                                    data-workout-title="@workout.Title"
+                                    style="text-decoration: none !important;">
+                                    <i class="fas fa-solid fa-pen-to-square me-2"></i>
+                                </a>
+                                <a 
+                                    href="#" 
+                                    data-toggle="modal" 
+                                    data-target="#logoutModal" 
+                                    data-workout-id="@workout.Id"
+                                    style="text-decoration: none !important;">
+                                    <i class="fas fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
                 <div class="text-center mt-5">
@@ -133,3 +136,20 @@
         </div>
     </div>
 </div>
+
+<partial name="Workout/__EditWorkoutModalPartial"/>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function() {
+            $('a[data-target="#editWorkoutModal"]').click(function() {
+                let workoutId = $(this).data('workout-id');
+                let workoutTitle = $(this).data('workout-title');
+        
+                $('#workoutId').val(workoutId);
+                $('#workoutTitle').val(workoutTitle);
+            });
+        });
+    </script>
+}

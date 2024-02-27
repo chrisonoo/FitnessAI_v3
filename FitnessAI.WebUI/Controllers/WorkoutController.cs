@@ -14,4 +14,11 @@ public class WorkoutController : BaseController
         
         return View(result);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> EditWorkoutTitle(string workoutTitle, string workoutId)
+    {
+        
+        return RedirectToAction(nameof(Workouts));
+    }
 }
