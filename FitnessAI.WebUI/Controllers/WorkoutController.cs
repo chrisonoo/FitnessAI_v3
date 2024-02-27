@@ -10,7 +10,7 @@ public class WorkoutController : BaseController
 {
     public async Task<IActionResult> Workouts()
     {
-        var result = await Mediator.Send(new GetWorkoutsQuery{UserId = LoggetUserId});
+        var result = await Mediator.Send(new GetWorkoutsQuery{UserId = LoggedUserId});
         
         return View(result);
     }

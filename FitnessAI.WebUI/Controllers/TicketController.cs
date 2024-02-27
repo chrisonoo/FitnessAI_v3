@@ -33,7 +33,7 @@ public class TicketController : BaseController
     public async Task<IActionResult> Tickets()
     {
         var isUserDataCompleted =
-            !string.IsNullOrWhiteSpace((await Mediator.Send(new GetClientQuery { UserId = LoggetUserId })).FirstName);
+            !string.IsNullOrWhiteSpace((await Mediator.Send(new GetClientQuery { UserId = LoggedUserId })).FirstName);
 
         var ticketsViewModel = new TicketsViewModel
         {
@@ -52,7 +52,7 @@ public class TicketController : BaseController
     {
         var tickets = await Mediator.Send(new GetClientsTicketsQuery
         {
-            UserId = LoggetUserId,
+            UserId = LoggedUserId,
             PageSize = request.Length,
             SearchValue = request.Search.Value,
             PageNumber = request.GetPageNumber(),
@@ -76,7 +76,7 @@ public class TicketController : BaseController
         {
             StartDate = vm.Ticket.StartDate,
             TicketTypeId = vm.Ticket.TicketTypeId,
-            UserId = LoggetUserId,
+            UserId = LoggedUserId,
             Price = vm.Ticket.Price
         });
 
@@ -96,7 +96,7 @@ public class TicketController : BaseController
         var ticket = await Mediator.Send(new GetPrintTicketQuery
         {
             TicketId = id,
-            UserId = LoggetUserId
+            UserId = LoggedUserId
         });
 
         return View(ticket);
@@ -109,7 +109,7 @@ public class TicketController : BaseController
             var ticketPdfVm = await Mediator.Send(new GetPdfTicketQuery
             {
                 TicketId = id,
-                UserId = LoggetUserId,
+                UserId = LoggedUserId,
                 Context = ControllerContext
             });
 
@@ -142,7 +142,7 @@ public class TicketController : BaseController
         var ticket = await Mediator.Send(new GetPrintTicketQuery
         {
             TicketId = id,
-            UserId = LoggetUserId
+            UserId = LoggedUserId
         });
 
         return View("TicketPreview", ticket);
