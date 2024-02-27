@@ -20,6 +20,7 @@ public interface IApplicationDbContext : IDisposable
     DbSet<TicketTypeTranslation> TicketTypeTranslations { get; set; }
     DbSet<ApplicationUser> Users { get; set; }
     DbSet<Exercise> Exercises { get; set; }
+    DbSet<UserExercise> UserExercises { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

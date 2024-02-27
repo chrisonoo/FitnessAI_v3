@@ -22,4 +22,6 @@ public class Exercise
     public string MultimediaUrl { get; set; }
     public DateTime CreatedDate { get; set; }
     public bool IsActive { get; set; }
+    
+    public ICollection<UserExercise> UserExercises { get; set; } = new HashSet<UserExercise>();
 }

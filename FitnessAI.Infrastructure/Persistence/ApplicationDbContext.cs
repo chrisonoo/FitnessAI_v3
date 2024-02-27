@@ -27,6 +27,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Language> Languages { get; set; }
     public DbSet<TicketTypeTranslation> TicketTypeTranslations { get; set; }
     public DbSet<Exercise> Exercises { get; set; }
+    public DbSet<UserExercise> UserExercises { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
