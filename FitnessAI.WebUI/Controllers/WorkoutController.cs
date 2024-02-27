@@ -23,4 +23,12 @@ public class WorkoutController : BaseController
         
         return RedirectToAction(nameof(Workouts));
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> DeleteWorkoutTitle(int workoutId)
+    {
+        var result = await Mediator.Send(new DeleteWorkoutCommand{WorkoutId = workoutId});
+        
+        return RedirectToAction(nameof(Workouts));
+    }
 }

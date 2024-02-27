@@ -19,6 +19,7 @@ public class GetWorkoutsQueryHandler : IRequestHandler<GetWorkoutsQuery, IEnumer
         var allWorkouts = await _context.Workouts
             .AsNoTracking()
             .Where(x => x.UserId == request.UserId)
+            .Where(x => x.IsActive)
             .Select(x => new WorkoutDto
             {
                 Id = x.Id,

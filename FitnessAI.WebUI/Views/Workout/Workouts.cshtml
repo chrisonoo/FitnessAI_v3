@@ -22,20 +22,21 @@
                                 @workout.Title
                             </td>
                             <td>
-                                <a 
-                                    href="#" 
-                                    data-toggle="modal" 
-                                    data-target="#editWorkoutModal" 
+                                <a
+                                    href="#"
+                                    data-toggle="modal"
+                                    data-target="#editWorkoutModal"
                                     data-workout-id="@workout.Id"
                                     data-workout-title="@workout.Title"
                                     style="text-decoration: none !important;">
                                     <i class="fas fa-solid fa-pen-to-square me-2"></i>
                                 </a>
-                                <a 
-                                    href="#" 
-                                    data-toggle="modal" 
-                                    data-target="#logoutModal" 
+                                <a
+                                    href="#"
+                                    data-toggle="modal"
+                                    data-target="#deleteWorkoutModal"
                                     data-workout-id="@workout.Id"
+                                    data-workout-title="@workout.Title"
                                     style="text-decoration: none !important;">
                                     <i class="fas fa-solid fa-trash-can"></i>
                                 </a>
@@ -138,6 +139,7 @@
 </div>
 
 <partial name="Workout/__EditWorkoutModalPartial"/>
+<partial name="Workout/__DeleteWorkoutModalPartial"/>
 
 @section Scripts
 {
@@ -147,8 +149,18 @@
                 let workoutId = $(this).data('workout-id');
                 let workoutTitle = $(this).data('workout-title');
         
-                $('#workoutId').val(workoutId);
-                $('#workoutTitle').val(workoutTitle);
+                $('#workoutEditId').val(workoutId);
+                $('#workoutEditTitle').val(workoutTitle);
+            });
+        });
+        
+        $(document).ready(function() {
+            $('a[data-target="#deleteWorkoutModal"]').click(function() {
+                let workoutId = $(this).data('workout-id');
+                let workoutTitle = $(this).data('workout-title');
+        
+                $('#workoutDeleteId').val(workoutId);
+                $('#workoutDeleteTitle').val(workoutTitle);
             });
         });
     </script>

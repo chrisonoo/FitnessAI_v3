@@ -1,10 +1,10 @@
 <!-- Logout Modal -->
-<div class="modal fade" id="editWorkoutModal" tabindex="-1" role="dialog" aria-labelledby="editWorkoutModalLabel"
+<div class="modal fade" id="deleteWorkoutModal" tabindex="-1" role="dialog" aria-labelledby="deleteWorkoutModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editWorkoutModalLabel">Zmiana nazwy treningu</h5>
+                <h5 class="modal-title" id="deleteWorkoutModalLabel">Czy chcesz usunąć ten trening?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -12,19 +12,19 @@
             <div class="modal-body">
                 <form
                     asp-controller="Workout"
-                    asp-action="EditWorkoutTitle"
+                    asp-action="DeleteWorkoutTitle"
                     method="post"
-                    id="saveWorkoutTitle">
-                    <input type="text" id="workoutEditTitle" name="workoutTitle" class="w-100">
-                    <input type="hidden" id="workoutEditId" name="workoutId">
+                    id="deleteWorkoutTitle">
+                    <input type="text" id="workoutDeleteTitle" class="w-100" readonly>
+                    <input type="hidden" id="workoutDeleteId" name="workoutId">
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">
                     <i class="fas fa-solid fa-rectangle-xmark pe-2"></i>Anuluj
                 </button>
-                <button form="saveWorkoutTitle" type="submit" class="btn btn-primary">
-                    <i class="fas fa-solid fa-floppy-disk pe-2"></i>Zapisz
+                <button form="deleteWorkoutTitle" type="submit" class="btn btn-primary">
+                    <i class="fas fa-solid fa-floppy-disk pe-2"></i>Usuń
                 </button>
             </div>
         </div>
