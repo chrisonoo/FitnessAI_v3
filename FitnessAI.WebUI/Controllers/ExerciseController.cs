@@ -18,11 +18,12 @@ public class ExerciseController : BaseController
     
     public async Task<IActionResult> ExerciseDetails(string id)
     {
-        var exercise = await Mediator.Send(new GetExerciseDetailsQuery
+        var exerciseDetailsViewModel = await Mediator.Send(new GetExerciseDetailsQuery
         {
-            ExerciseId = int.Parse(id)
+            ExerciseId = int.Parse(id),
+            ActiveUserId = LoggedUserId
         });
 
-        return View(exercise);
+        return View(exerciseDetailsViewModel);
     }
 }

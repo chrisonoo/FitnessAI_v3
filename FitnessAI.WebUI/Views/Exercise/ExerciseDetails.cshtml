@@ -7,15 +7,38 @@
 <div class="container text-center mb-3">
     <div class="d-flex justify-content-around align-items-center">
         <div>
-            <a href='/Exercise/ExerciseDetails?id=@Model.PreviousExerciseId' class="btn btn-primary" role="button">
+            <a
+                asp-controller="Exercise"
+                asp-action="ExerciseDetails"
+                asp-route-id="@Model.PreviousExerciseId"
+                class="btn btn-primary"
+                role="button">
                 <i class="fas fa-solid fa-backward me-2"></i>Poprzednie
             </a>
         </div>
         <div>
-            Dodaj do moich ćwiczeń
+            <div class="form-check form-switch m-2">
+                <input
+                    id="active-@Model.Exercise.Id"
+                    class="form-check-input active-exercise-check"
+                    type="checkbox" role="switch"
+                    autocomplete="off"
+                    data-exercise-id="@Model.Exercise.Id"
+                    @(Model.IsSelectedForActiveUser ? "checked" : "")>
+                <label
+                    for="active-@Model.Exercise.Id"
+                    class="form-check-label">
+                    Dodaj do <b>moich treningów</b>
+                </label>
+            </div>
         </div>
         <div>
-            <a href='/Exercise/ExerciseDetails?id=@Model.NextExerciseId' class="btn btn-primary" role="button">
+            <a
+                asp-controller="Exercise"
+                asp-action="ExerciseDetails"
+                asp-route-id="@Model.NextExerciseId"
+                class="btn btn-primary"
+                role="button">
                 Następne<i class="fas fa-solid fa-forward ms-2"></i>
             </a>
         </div>
@@ -50,8 +73,33 @@
 @section Scripts{
     <script>
         $(document).ready(function (){
-             let instructionElement = $('#instructionElement');
-             instructionElement.html(insertBreaks(instructionElement.html()));
+            let instructionElement = $('#instructionElement');
+            instructionElement.html(insertBreaks(instructionElement.html()));
+             
+            $('.active-exercise-check').change(function () {
+                let isSelected = $(this).is(':checked');
+                let exerciseId = $(this).data('exercise-id');
+        
+                let data = {
+                    isSelected,
+                    exerciseId
+                };
+        
+                $.ajax({
+                    url: '/api/question/updateinactive',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success(response) {
+                       console.log(response);
+                    },
+                    error(error) {
+                       console.log(error);
+                    }
+                });
+                 
+            });
         });
      
         function insertBreaks(input) {

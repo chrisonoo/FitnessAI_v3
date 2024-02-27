@@ -28,7 +28,10 @@ public class GetExerciseDetailsQueryHandler : IRequestHandler<GetExerciseDetails
         {
             Exercise = exercise,
             NextExerciseId = await _exerciseNavigationService.GetNextExerciseIdAsync(request.ExerciseId),
-            PreviousExerciseId = await _exerciseNavigationService.GetPreviousExerciseIdAsync(request.ExerciseId)
+            PreviousExerciseId = await _exerciseNavigationService.GetPreviousExerciseIdAsync(request.ExerciseId),
+            ActiveUserId = request.ActiveUserId,
+            IsSelectedForActiveUser = await _context.UserExercises
+                .AnyAsync(ue => ue.UserId == request.ActiveUserId && ue.ExerciseId == request.ExerciseId, cancellationToken)
         };
 
         return exerciseDetailsViewModel;

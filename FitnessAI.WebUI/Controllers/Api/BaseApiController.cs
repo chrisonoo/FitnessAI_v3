@@ -13,6 +13,7 @@ public abstract class BaseApiController : ControllerBase
     protected readonly SignInManager<ApplicationUser> SignInManager;
     protected readonly IApplicationDbContext Context;
     protected readonly IDateTimeService DateTimeService;
+    protected const string ACCESS_TOKEN = "temporary-token-12345";
 
     protected BaseApiController(
         SignInManager<ApplicationUser> signInManager, 
@@ -28,7 +29,6 @@ public abstract class BaseApiController : ControllerBase
 
     protected async Task<bool> IsUserAuthorized(ApiCurrentUserDto curentUserDto)
     {
-        const string ACCESS_TOKEN = "temporary-token-12345";
         var currentUserToken = curentUserDto.AccessToken;
         var currentUser = await SignInManager.UserManager.FindByNameAsync(curentUserDto.Username);
         
