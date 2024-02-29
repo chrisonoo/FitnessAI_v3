@@ -19,15 +19,36 @@ public class WorkoutApiController: BaseApiController
     {
     }
     
-    [HttpPost]
-    public async Task<IActionResult> ExercisesForWorkout([FromBody] ApiWorkout workout)
+    [Route("{workoutId:int}")]
+    public async Task<IActionResult> ExercisesForWorkout(int workoutId)
     {
-        var currentWorkout = await Context.Workouts.FindAsync(workout.WorkoutId);
+        var currentWorkout = await Context.Workouts.FindAsync(workoutId);
         var currentUser = await SignInManager.UserManager.FindByIdAsync(currentWorkout!.UserId);
         var currentUserExercises = await Context.UserExercises
             .Where(ue => ue.UserId == currentUser.Id)
             .ToListAsync();
+        var workoutExercises = Context.WorkoutExercises
+            .Where(we => we.WorkoutId == workoutId)
+            .Select(we => new ApiWorkoutExerciseDto
+            {
+                Id = we.Id,
+                WorkoutId = we.WorkoutId,
+                ExerciseId = we.ExerciseId
+            });
         
-        return Ok(currentUserExercises);
+        var currentUserExercisesNotAddedToCurrentWorkout = currentUserExercises
+            .Where(ue => workoutExercises.All(we => we.ExerciseId != ue.ExerciseId))
+            .Select(ue => new ApiUserExerciseDto
+            {
+                Id = ue.Id,
+                WorkoutId = workoutId,
+                ExerciseId = ue.ExerciseId
+            });
+        
+        return Ok(new
+        {
+            workout_exercises = workoutExercises,
+            exercises_to_add = currentUserExercisesNotAddedToCurrentWorkout
+        });
     }
 }
