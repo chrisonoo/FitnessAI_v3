@@ -25,15 +25,19 @@ public class WorkoutApiController: BaseApiController
         var currentWorkout = await Context.Workouts.FindAsync(workoutId);
         var currentUser = await SignInManager.UserManager.FindByIdAsync(currentWorkout!.UserId);
         var currentUserExercises = await Context.UserExercises
+            .Include(ue => ue.Exercise)
             .Where(ue => ue.UserId == currentUser.Id)
             .ToListAsync();
         var workoutExercises = Context.WorkoutExercises
+            .Include(we => we.Exercise)
             .Where(we => we.WorkoutId == workoutId)
             .Select(we => new ApiWorkoutExerciseDto
             {
                 Id = we.Id,
                 WorkoutId = we.WorkoutId,
-                ExerciseId = we.ExerciseId
+                ExerciseId = we.ExerciseId,
+                ExerciseTitle = we.Exercise.Title,
+                ExerciseCategory = we.Exercise.Category
             });
         
         var currentUserExercisesNotAddedToCurrentWorkout = currentUserExercises
@@ -42,7 +46,9 @@ public class WorkoutApiController: BaseApiController
             {
                 Id = ue.Id,
                 WorkoutId = workoutId,
-                ExerciseId = ue.ExerciseId
+                ExerciseId = ue.ExerciseId,
+                ExerciseTitle = ue.Exercise.Title,
+                ExerciseCategory = ue.Exercise.Category
             });
         
         return Ok(new
