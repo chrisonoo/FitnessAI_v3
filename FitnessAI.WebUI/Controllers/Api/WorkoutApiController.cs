@@ -38,7 +38,9 @@ public class WorkoutApiController: BaseApiController
                 ExerciseId = we.ExerciseId,
                 ExerciseTitle = we.Exercise.Title,
                 ExerciseCategory = we.Exercise.Category
-            });
+            })
+            .OrderBy(we => we.ExerciseCategory)
+            .ThenBy(we => we.ExerciseTitle);
         
         var currentUserExercisesNotAddedToCurrentWorkout = currentUserExercises
             .Where(ue => workoutExercises.All(we => we.ExerciseId != ue.ExerciseId))
@@ -49,12 +51,39 @@ public class WorkoutApiController: BaseApiController
                 ExerciseId = ue.ExerciseId,
                 ExerciseTitle = ue.Exercise.Title,
                 ExerciseCategory = ue.Exercise.Category
-            });
+            })
+            .OrderBy(ue => ue.ExerciseCategory)
+            .ThenBy(ue => ue.ExerciseTitle);
         
         return Ok(new
         {
             workout_exercises = workoutExercises,
             exercises_to_add = currentUserExercisesNotAddedToCurrentWorkout
         });
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> ChangeExerciseAssigment([FromBody] ApiChangeExerciseAssigmentDto changeExerciseAssigment)
+    {
+        if (changeExerciseAssigment.IsAssigned)
+        {
+            var workoutExercise = new WorkoutExercise
+            {
+                WorkoutId = changeExerciseAssigment.WorkoutId,
+                ExerciseId = changeExerciseAssigment.ExerciseId
+            };
+            await Context.WorkoutExercises.AddAsync(workoutExercise);
+        }
+        else
+        {
+            var workoutExercise = await Context.WorkoutExercises
+                .FirstOrDefaultAsync(we => we.WorkoutId == changeExerciseAssigment.WorkoutId && we.ExerciseId == changeExerciseAssigment.ExerciseId);
+            if (workoutExercise is not null)
+                Context.WorkoutExercises.Remove(workoutExercise);
+        }
+        
+        await Context.SaveChangesAsync();
+        
+        return Ok();
     }
 }

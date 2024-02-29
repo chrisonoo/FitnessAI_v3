@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="d-flex gap-3 border p-3 bg-white">
-        <div id="workouts-list" class="flex-fill bg-white border" style="width: 45%">
+        <div id="workouts-list" class="bg-white border" style="width: 45%">
             <h2 class="text-center m-2">Treningi</h2>
             <div class="border m-3 p-4">
                 <div class="text-center mb-3 d-flex gap-2">
@@ -62,58 +62,36 @@
         </div>
         <div id="exercises-list" class="flex-fill bg-white border">
             <h2 class="text-center m-2">Ćwiczenia</h2>
+
+            <!-- Ćwiczenia dodane do treningu -->
             <div class="border m-3 p-4">
                 <div class="text-center mb-3">
                     <h5>Ćwiczenia dodane do treningu</h5>
                 </div>
-                <table class="table table-hover">
-                    <tbody>
+                <table
+                    id="workout-exercises"
+                    class="table table-hover">
                     <tr>
                         <td>
-                            Ćwiczenie na nogi
-                        </td>
-                        <td>
-                            Kalistenika
-                        </td>
-                        <td>
-                            <a
-                                href="#"
-                                data-toggle="modal"
-                                data-target="#deleteWorkoutModal"
-                                @* data-exercise-id="@workout.Id" *@
-                                style="text-decoration: none !important;">
-                                <i class="fas fa-solid fa-trash-can"></i>
-                            </a>
+                            Wybierz trening z listy po lewej stronie
                         </td>
                     </tr>
-                    </tbody>
                 </table>
             </div>
+
+            <!-- Ćwiczenia które można dodać do treningu -->
             <div class="border m-3 p-4">
                 <div class="text-center mb-3">
                     <h5>Moje Ćwiczenia</h5>
                 </div>
-                <table class="table table-hover">
-                    <tbody>
+                <table
+                    id="exercises-to-add"
+                    class="table table-hover">
                     <tr>
                         <td>
-                            Ćwiczenie na nogi
-                        </td>
-                        <td>
-                            Kalistenika
-                        </td>
-                        <td>
-                            <a
-                                href="#"
-                                data-toggle="modal"
-                                data-target="#deleteWorkoutModal"
-                                @* data-exercise-id="@workout.Id" *@
-                                style="text-decoration: none !important;">
-                                <i class="fas fa-solid fa-circle-plus"></i>
-                            </a>
+                            Wybierz trening z listy po lewej stronie
                         </td>
                     </tr>
-                    </tbody>
                 </table>
             </div>
         </div>

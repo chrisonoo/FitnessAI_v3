@@ -45,7 +45,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 3,
                 Title = "Martwy ciąg",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description =
                     "Martwy ciąg to ćwiczenie siłowe, które angażuje wiele grup mięśniowych, w tym mięśnie pleców, nogi i pośladki.",
                 WorkoutInstruction =
@@ -62,7 +62,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 4,
                 Title = "Bieganie",
-                Category = "Ćwiczenia kardio",
+                Category = "Kardio",
                 Description =
                     "Bieganie to świetny sposób na poprawę kondycji sercowo-naczyniowej, spalanie kalorii i poprawę nastroju.",
                 WorkoutInstruction =
@@ -79,7 +79,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 5,
                 Title = "Skakanka",
-                Category = "Ćwiczenia kardio",
+                Category = "Kardio",
                 Description =
                     "Skakanie na skakance to efektywny sposób na poprawę koordynacji, spalanie kalorii i wzmacnianie mięśni nóg.",
                 WorkoutInstruction =
@@ -96,7 +96,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 6,
                 Title = "Wyciskanie sztangi",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description =
                     "Wyciskanie sztangi to podstawowe ćwiczenie na klatkę piersiową, triceps i przednie części barków.",
                 WorkoutInstruction =
@@ -130,7 +130,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 8,
                 Title = "Wiosłowanie sztangą",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description = "Wiosłowanie sztangą to ćwiczenie angażujące mięśnie pleców, biceps oraz ramiona.",
                 WorkoutInstruction =
                     "1. Stań w lekkim rozkroku, trzymając sztangę. 2. Schyl się w pasie, trzymając plecy prosto. 3. Ciągnij sztangę do dolnej części brzucha. 4. Opuszczaj sztangę kontrolowanie.",
@@ -147,7 +147,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 9,
                 Title = "Wyciskanie hantli",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description =
                     "Wyciskanie hantli to ćwiczenie na klatkę piersiową, które pozwala na pracę nad symetrią i równowagą siły.",
                 WorkoutInstruction =
@@ -164,7 +164,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 10,
                 Title = "Prostowanie ramion w siadzie",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description =
                     "Prostowanie ramion w siadzie to ćwiczenie izolujące triceps, wykonane z hantlą lub sztangielką.",
                 WorkoutInstruction =
@@ -181,7 +181,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 11,
                 Title = "Uginanie ramion ze sztangą",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description = "Uginanie ramion ze sztangą to ćwiczenie na biceps, wykonane ze sztangą.",
                 WorkoutInstruction =
                     "1. Stań prosto, trzymając sztangę chwytem podchwytem. 2. Uginaj ramiona, podnosząc sztangę do barków. 3. Powoli opuszczaj sztangę do pozycji wyjściowej.",
@@ -197,7 +197,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 12,
                 Title = "Uginanie ramion ze sztangielkami",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description = "Uginanie ramion ze sztangielkami pozwala na pracę nad symetrią i siłą bicepsów.",
                 WorkoutInstruction =
                     "1. Stań prosto, trzymając sztangielkę w każdej ręce. 2. Uginaj ramiona na przemian, podnosząc sztangielki do barków. 3. Powoli opuszczaj sztangielki.",
@@ -213,7 +213,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 13,
                 Title = "Wyciskanie na maszynie",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description =
                     "Wyciskanie na maszynie to ćwiczenie na klatkę piersiową, które zapewnia stabilizację ruchu.",
                 WorkoutInstruction =
@@ -230,7 +230,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 14,
                 Title = "Prostowanie nóg na maszynie",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description = "Prostowanie nóg na maszynie to ćwiczenie izolujące mięśnie czworogłowe uda.",
                 WorkoutInstruction =
                     "1. Usiądź na maszynie do prostowania nóg. 2. Umieść podudzia pod wałek. 3. Prostuj nogi, unosząc wałek. 4. Powoli opuszczaj wałek.",
@@ -246,7 +246,7 @@ internal static class ModelBuilderExtensionsExercise
             {
                 Id = 15,
                 Title = "Uginanie nóg na maszynie",
-                Category = "Ćwiczenia z ciężarami",
+                Category = "Ciężary",
                 Description = "Uginanie nóg na maszynie to ćwiczenie na mięśnie dwugłowe uda.",
                 WorkoutInstruction =
                     "1. Połóż się na brzuchu na maszynie do uginania nóg. 2. Uginaj nogi w kolanach, przyciągając wałek do pośladków. 3. Powoli opuszczaj wałek.",
