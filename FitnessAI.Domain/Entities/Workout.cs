@@ -17,4 +17,6 @@ public class Workout
 
     public ApplicationUser User { get; set; }
     public bool IsActive { get; set; }
+    
+    public ICollection<WorkoutExercise> WorkoutExercises { get; set; }
 }
