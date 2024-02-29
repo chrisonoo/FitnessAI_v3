@@ -48,8 +48,7 @@ public class ExerciseApiController : BaseApiController
         }
         
         await Context.SaveChangesAsync();
-        
-        var result = new { test_string = "Workouts test text" };
-        return Ok(result);
+
+        return Ok();
     }
 }

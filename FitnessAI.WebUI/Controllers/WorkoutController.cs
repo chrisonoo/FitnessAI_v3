@@ -31,4 +31,12 @@ public class WorkoutController : BaseController
         
         return RedirectToAction(nameof(Workouts));
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> AddWorkout(string workoutTitle)
+    {
+        var result = await Mediator.Send(new AddWorkoutCommand{WorkoutTitle = workoutTitle, UserId = LoggedUserId});
+        
+        return RedirectToAction(nameof(Workouts));
+    }
 }

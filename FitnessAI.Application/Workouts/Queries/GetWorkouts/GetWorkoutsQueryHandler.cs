@@ -26,6 +26,7 @@ public class GetWorkoutsQueryHandler : IRequestHandler<GetWorkoutsQuery, IEnumer
                 Title = x.Title,
                 UserId = x.UserId
             })
+            .OrderBy(x => x.Title)
             .ToListAsync(cancellationToken: cancellationToken);
         
 

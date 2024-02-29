@@ -9,16 +9,18 @@
         <div id="workouts-list" class="flex-fill bg-white border" style="width: 45%">
             <h2 class="text-center m-2">Treningi</h2>
             <div class="border m-3 p-4">
-                <div class="text-center mb-3">
-                    <h5>Wybierz trening, dodaj ćwiczenia</h5>
+                <div class="text-center mb-3 d-flex gap-2">
+                    <h5 class="flex-fill">Wybierz trening</h5>
                 </div>
 
                 <table class="table table-hover">
                     <tbody>
                     @foreach (var workout in Model)
                     {
-                        <tr>
-                            <td id="workout-title-@workout.Id">
+                        <tr
+                            class="row-workout"
+                            data-row-workout-id="@workout.Id">
+                            <td>
                                 @workout.Title
                             </td>
                             <td>
@@ -47,11 +49,13 @@
                 </table>
                 <div class="text-center mt-5">
                     <a
-                        asp-controller="Client"
-                        asp-action="EditClient"
-                        class="btn btn-primary mx-5"
-                        role="button">
-                        <i class="fas fa-solid fa-circle-plus me-2"></i>Zaplanuj nowy trening
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#addWorkoutModal"
+                        role="button"
+                        class="btn btn-primary mx-5">
+                        <i class="fas fa-solid fa-circle-plus me-2"></i>
+                        Zaplanuj nowy trening
                     </a>
                 </div>
             </div>
@@ -60,79 +64,57 @@
             <h2 class="text-center m-2">Ćwiczenia</h2>
             <div class="border m-3 p-4">
                 <div class="text-center mb-3">
-                    <h5>Nazwa wybranego treningu</h5>
+                    <h5>Ćwiczenia dodane do treningu</h5>
                 </div>
                 <table class="table table-hover">
                     <tbody>
                     <tr>
                         <td>
-                            <div class="form-check form-switch ms-4">
-                                <input
-                                    @* id="active-@Model.Exercise.Id" *@
-                                    id="active1"
-                                    class="form-check-input active-exercise-check"
-                                    type="checkbox" role="switch"
-                                    autocomplete="off"
-                                    @* data-exercise-id="@Model.Exercise.Id" *@
-                                    @* @(Model.IsSelectedForActiveUser ? "checked" : "") *@>
-                                <label
-                                    for="active1"
-                                    class="form-check-label ms-3">
-                                    Dodaj do moich treningów
-                                </label>
-                            </div>
+                            Ćwiczenie na nogi
                         </td>
                         <td>
                             Kalistenika
                         </td>
-                    </tr>
-                    <tr>
                         <td>
-                            <div class="form-check form-switch ms-4">
-                                <input
-                                    @* id="active-@Model.Exercise.Id" *@
-                                    id="active2"
-                                    class="form-check-input active-exercise-check"
-                                    type="checkbox" role="switch"
-                                    autocomplete="off"
-                                    @* data-exercise-id="@Model.Exercise.Id" *@
-                                    @* @(Model.IsSelectedForActiveUser ? "checked" : "") *@>
-                                <label
-                                    for="active2"
-                                    class="form-check-label ms-3">
-                                    Dodaj do moich treningów
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            Ćwiczenia z obciążeniem
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check form-switch ms-4">
-                                <input
-                                    @* id="active-@Model.Exercise.Id" *@
-                                    id="active3"
-                                    class="form-check-input active-exercise-check"
-                                    type="checkbox" role="switch"
-                                    autocomplete="off"
-                                    @* data-exercise-id="@Model.Exercise.Id" *@
-                                    @* @(Model.IsSelectedForActiveUser ? "checked" : "") *@>
-                                <label
-                                    for="active3"
-                                    class="form-check-label ms-3">
-                                    Dodaj do moich treningów
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            Aeroby
+                            <a
+                                href="#"
+                                data-toggle="modal"
+                                data-target="#deleteWorkoutModal"
+                                @* data-exercise-id="@workout.Id" *@
+                                style="text-decoration: none !important;">
+                                <i class="fas fa-solid fa-trash-can"></i>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-
+            </div>
+            <div class="border m-3 p-4">
+                <div class="text-center mb-3">
+                    <h5>Moje Ćwiczenia</h5>
+                </div>
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <td>
+                            Ćwiczenie na nogi
+                        </td>
+                        <td>
+                            Kalistenika
+                        </td>
+                        <td>
+                            <a
+                                href="#"
+                                data-toggle="modal"
+                                data-target="#deleteWorkoutModal"
+                                @* data-exercise-id="@workout.Id" *@
+                                style="text-decoration: none !important;">
+                                <i class="fas fa-solid fa-circle-plus"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -140,6 +122,7 @@
 
 <partial name="Workout/__EditWorkoutModalPartial"/>
 <partial name="Workout/__DeleteWorkoutModalPartial"/>
+<partial name="Workout/__AddWorkoutModalPartial"/>
 
 @section Scripts
 {
@@ -163,5 +146,39 @@
                 $('#workoutDeleteTitle').val(workoutTitle);
             });
         });
+        
+        $(document).ready(function() {
+            $('.row-workout').click(function() {
+                $('.row-workout')
+                    .css('background-color', '')
+                    .css('color', '');
+                $('.row-workout a')
+                    .css('color', '');
+                
+                $(this)
+                    .css('background-color', '#2a4db2')
+                    .css('color', 'white');
+                $(this).find('a')
+                    .css('color', 'white');
+                
+                let workoutId = $(this).data('row-workout-id');
+                showMyExercises(workoutId);
+            });
+        });
+        
+        function showMyExercises(workoutId) {
+            getMyExercises(workoutId);
+        }
+        
+        function getMyExercises(workoutId) {
+            $.ajax({
+                url: '/api/exerciseapi/GetMyExercises',
+                type: 'GET',
+                data: { workoutId },
+                success: function(data) {
+                    $('#exercises-list').html(data);
+                }
+            });
+        }
     </script>
 }

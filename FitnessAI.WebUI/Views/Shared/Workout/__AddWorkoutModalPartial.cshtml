@@ -1,10 +1,10 @@
 <!-- Logout Modal -->
-<div class="modal fade" id="deleteWorkoutModal" tabindex="-1" role="dialog" aria-labelledby="deleteWorkoutModalLabel"
+<div class="modal fade" id="addWorkoutModal" tabindex="-1" role="dialog" aria-labelledby="addWorkoutModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteWorkoutModalLabel">Czy chcesz usunąć ten trening?</h5>
+                <h5 class="modal-title" id="addWorkoutModalLabel">Podaj nazwę nowego treningu</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -12,19 +12,18 @@
             <div class="modal-body">
                 <form
                     asp-controller="Workout"
-                    asp-action="DeleteWorkoutTitle"
+                    asp-action="AddWorkout"
                     method="post"
-                    id="deleteWorkoutTitle">
-                    <input type="text" id="workoutDeleteTitle" class="w-100 bg-gray-200" disabled>
-                    <input type="hidden" id="workoutDeleteId" name="workoutId">
+                    id="addWorkoutTitle">
+                    <input type="text" id="workoutAddTitle" name="workoutTitle" class="w-100">
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">
                     <i class="fas fa-solid fa-rectangle-xmark pe-2"></i>Anuluj
                 </button>
-                <button form="deleteWorkoutTitle" type="submit" class="btn btn-primary">
-                    <i class="fas fa-solid fa-floppy-disk pe-2"></i>Usuń
+                <button form="addWorkoutTitle" type="submit" class="btn btn-primary">
+                    <i class="fas fa-solid fa-floppy-disk pe-2"></i>Dodaj
                 </button>
             </div>
         </div>
