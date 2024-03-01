@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model FitnessAI.Application.WorkoutsCalendar.Queries.GetWorkoutsCalendar.WorkoutCalendarViewModel
 
 @{
@@ -36,16 +37,30 @@
 
 <div class="container">
     <div class="border p-3 bg-white">
-        <div class="bg-white border p-3 text-center">
-            <h3 id="training" class="mb-3">Brak treningu w wybranym dniu</h3>
+        @if (Model.WorkoutCalendar == null)
+        {
+            <div class="bg-white border p-3 text-center">
+                <h3 id="workout-title" class="mb-3">Brak treningu w wybranym dniu</h3>
 
-            <select id="trainingSelect">
-                <option value="Brak treningu w wybranym dniu">Wybierz trening</option>
-                <option value="Trening Aaa">Trening A</option>
-                <option value="Trening Bbb">Trening B</option>
-                <option value="Trening Ccc">Trening C</option>
-            </select>
-        </div>
+                <select id="workoutSelect">
+                    <option value="Brak treningu w wybranym dniu">Wybierz trening</option>
+                    @foreach (var workout in Model.Workouts)
+                    {
+                        <option
+                            data-workout-id="@workout.Id"
+                            value="@workout.Title">
+                            @workout.Title
+                        </option>
+                    }
+                </select>
+            </div>
+        }
+        else
+        {
+            <div class="bg-white border p-3 text-center">
+                <h3 id="workout-title" class="m-2">@Model.WorkoutCalendar.Title</h3>
+            </div>
+        }
 
         <div class="bg-white border mt-3 p-3">
             <h3 class="mb-3 text-center">Lista ćwiczeń</h3>
@@ -53,15 +68,34 @@
         </div>
 
         <div class="text-center mt-3">
-            <a
-                href="#"
-                data-toggle="modal"
-                data-target="#addWorkoutModal"
-                role="button"
-                class="btn btn-primary">
-                <i class="fas fa-solid fa-circle-plus me-2"></i>
-                Zatwierdź trening
-            </a>
+            @if (Model.WorkoutCalendar == null)
+            {
+                <form
+                    asp-controller="WorkoutCalendar"
+                    asp-action="SetSelectedWorkoutAsDone"
+                    method="post">
+                    <input type="hidden" name="workoutId" value=""/>
+                    <input type="hidden" name="workoutDate" value="@Model.SelectedDate.ToString("yyyy-MM-dd")"/>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-solid fa-circle-plus me-2"></i>
+                        Zatwierdź dzisiejszy trening
+                    </button>
+                </form>
+            }
+            else
+            {
+                <form
+                    asp-controller="WorkoutCalendar"
+                    asp-action="DeleteSelectedWorkout"
+                    method="post">
+                    <input type="hidden" name="workoutCalendarId" value="@Model.WorkoutCalendar.Id"/>
+                    <input type="hidden" name="workoutDate" value="@Model.SelectedDate.ToString("yyyy-MM-dd")"/>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-solid fa-circle-plus me-2"></i>
+                        Usuń dzisiejszy trening
+                    </button>
+                </form>
+            }
         </div>
     </div>
 </div>
@@ -70,9 +104,12 @@
 {
     <script>
        $(document).ready(function(){
-           $('#trainingSelect').change(function(){
-               let selectedTraining = $(this).val();
-               $('#training').text(selectedTraining);
+           $('#workoutSelect').change(function(){
+               let selectedWorkout = $(this).val();
+               let selectedWorkoutId = $(this).find(':selected').data('workout-id');
+               
+               $('#workout-title').text(selectedWorkout);
+               $('input[name="workoutId"]').val(selectedWorkoutId);
            });
        });
    </script>

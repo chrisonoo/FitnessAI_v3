@@ -5,7 +5,7 @@ namespace FitnessAI.Domain.Entities;
 
 public class WorkoutCalendar
 {
-    public ICollection<WorkoutCalendarExercise> WorkoutCalendarExercises = new HashSet<WorkoutCalendarExercise>();
+    public readonly ICollection<WorkoutCalendarExercise> WorkoutCalendarExercises = new HashSet<WorkoutCalendarExercise>();
 
     [Key]
     public int Id { get; set; }
