@@ -33,6 +33,8 @@ public class GetExerciseDetailsQueryHandler : IRequestHandler<GetExerciseDetails
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Id == request.ActiveUserId, cancellationToken: cancellationToken)).UserName,
             IsSelectedForActiveUser = await _context.UserExercises
+                .AsNoTracking()
+                .Where(ue => ue.IsActive)
                 .AnyAsync(ue => ue.UserId == request.ActiveUserId && ue.ExerciseId == request.ExerciseId, cancellationToken)
         };
 

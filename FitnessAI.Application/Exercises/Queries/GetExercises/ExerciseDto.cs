@@ -12,4 +12,5 @@ public class ExerciseDto
     public string AdvancedLoad { get; set; }
     public string ImageUrl { get; set; }
     public string MultimediaUrl { get; set; }
+    public bool IsSelectedForActiveUser { get; set; }
 }

@@ -24,6 +24,7 @@
                 <th>Nazwa ćwiczenia</th>
                 <th class="desktop">Kategoria</th>
                 <th class="desktop">Opis</th>
+                <th class="desktop">Dodane</th>
                 <th class="desktop"></th>
             </tr>
             </thead>
@@ -40,6 +41,18 @@
                     </td>
                     <td>
                         @exercise.Description
+                    </td>
+                    <td class="text-center p-0" style="vertical-align: middle;">
+                        <a role="button" href="/Exercise/ExerciseDetails?id=@exercise.Id" style="font-size: 24px">
+                        @if (exercise.IsSelectedForActiveUser)
+                        {
+                            <i class="fas fa-solid fa-square-check"></i>
+                        }
+                        else
+                        {
+                            <i class="fas fa-light fa-square"></i>
+                        }
+                        </a>
                     </td>
                     <td>
                         <a class="btn btn-success btn-sm" role="button" href="/Exercise/ExerciseDetails?id=@exercise.Id">
