@@ -1,0 +1,83 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Globalization
+@model IEnumerable<FitnessAI.Application.Exercises.Queries.GetExercises.ExerciseDto>
+
+@{
+    ViewBag.Title = "Ćwiczenia";
+    var locale = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+@section Styles {
+    <partial name="Styles/_DataTablesStyles"/>
+}
+
+
+<div class="card card-primary card-border-top">
+
+    <partial name="_Overlay"/>
+
+    <div class="card-body">
+
+        <table id="exercises" class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Nazwa ćwiczenia</th>
+                <th class="desktop">Kategoria</th>
+                <th class="desktop">Opis</th>
+                <th class="desktop"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var exercise in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="edit-link" href='/Exercise/ExerciseDetails?id=@exercise.Id'>@exercise.Title</a>
+                    </td>
+                    <td>
+                        @exercise.Category
+                    </td>
+                    <td>
+                        @exercise.Description
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-sm" role="button" href="/Exercise/ExerciseDetails?id=@exercise.Id">
+                            <i class="fas fa-solid fa-magnifying-glass me-2"></i>Szczegóły
+                        </a>
+                    </td>
+                </tr>
+            }
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <partial name="Scripts/_DataTablesScripts"/>
+
+    <script>
+        let selectedRow;
+        let selectedRoleId = 0;
+        let roles;
+
+        $(document).ready(function () {
+            roles = $('#exercises').DataTable({
+                paging: true,
+                ordering: true,
+                info: true,
+                responsive: true,
+                autoWidth: false,
+                lengthChange: true,
+                language: {
+                    url: `/lib/datatables/lang/${'@locale'}.json`
+                },
+                order: [[0, "asc"]]
+            });
+        });
+    </script>
+}
