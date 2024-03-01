@@ -1,4 +1,3 @@
-using System.Linq.Dynamic.Core;
 using FitnessAI.Application.Common.Interfaces;
 using FitnessAI.Domain.Entities;
 using MediatR;
@@ -6,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FitnessAI.Application.WorkoutsCalendar.Command.SetWorkoutAsDone;
 
-public class SetWorkoutAsDoneCommandHandler :IRequestHandler<SetWorkoutAsDoneCommand>
+public class SetWorkoutAsDoneCommandHandler : IRequestHandler<SetWorkoutAsDoneCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -14,23 +13,23 @@ public class SetWorkoutAsDoneCommandHandler :IRequestHandler<SetWorkoutAsDoneCom
     {
         _context = context;
     }
-    
+
     public async Task<Unit> Handle(SetWorkoutAsDoneCommand request, CancellationToken cancellationToken)
     {
         var workoutCalendar = await _context.WorkoutCalendars
             .Include(x => x.WorkoutCalendarExercises)
             .Where(x => x.UserId == request.UserId)
-            .FirstOrDefaultAsync(x => x.Date == DateTime.Parse(request.WorkoutDate), cancellationToken: cancellationToken);
+            .FirstOrDefaultAsync(x => x.Date == DateTime.Parse(request.WorkoutDate), cancellationToken);
 
         if (workoutCalendar != null) return Unit.Value;
-        
+
         var workout = await _context.Workouts
             .Include(x => x.WorkoutExercises)
-            .FirstOrDefaultAsync(x => x.Id == int.Parse(request.WorkoutId), cancellationToken: cancellationToken);
-        
+            .FirstOrDefaultAsync(x => x.Id == int.Parse(request.WorkoutId), cancellationToken);
+
         workoutCalendar = new WorkoutCalendar
         {
-            UserId = request.UserId, 
+            UserId = request.UserId,
             Date = DateTime.Parse(request.WorkoutDate),
             Title = workout.Title,
             IsActive = true
@@ -56,7 +55,6 @@ public class SetWorkoutAsDoneCommandHandler :IRequestHandler<SetWorkoutAsDoneCom
         // {
         //     workoutCalendarExercise.IsDone = !workoutCalendarExercise.IsDone;
         // }
-
 
 
         return Unit.Value;

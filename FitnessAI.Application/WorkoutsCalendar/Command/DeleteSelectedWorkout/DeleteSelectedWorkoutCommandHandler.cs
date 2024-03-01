@@ -1,5 +1,4 @@
 using FitnessAI.Application.Common.Interfaces;
-using FitnessAI.Application.WorkoutsCalendar.Command.SetWorkoutAsDone;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
