@@ -23,6 +23,8 @@ public interface IApplicationDbContext : IDisposable
     DbSet<UserExercise> UserExercises { get; set; }
     DbSet<Workout> Workouts { get; set; }
     DbSet<WorkoutExercise> WorkoutExercises { get; set; }
+    DbSet<WorkoutCalendar> WorkoutCalendars { get; set; }
+    DbSet<WorkoutCalendarExercise> WorkoutCalendarExercises { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

@@ -30,6 +30,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<UserExercise> UserExercises { get; set; }
     public DbSet<Workout> Workouts { get; set; }
     public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
+    public DbSet<WorkoutCalendar> WorkoutCalendars { get; set; }
+    public DbSet<WorkoutCalendarExercise> WorkoutCalendarExercises { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

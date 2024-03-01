@@ -17,4 +17,5 @@ public class ApplicationUser : IdentityUser
     public ICollection<EmployeeEvent> EmployeeEvents { get; set; } = new HashSet<EmployeeEvent>();
     public ICollection<UserExercise> UserExercises { get; set; } = new HashSet<UserExercise>();
     public ICollection<Workout> Workouts { get; set; } = new HashSet<Workout>();
+    public ICollection<WorkoutCalendar> WorkoutCalendars { get; set; } = new HashSet<WorkoutCalendar>();
 }
