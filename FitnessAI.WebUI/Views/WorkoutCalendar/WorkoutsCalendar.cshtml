@@ -1,8 +1,79 @@
-@using FitnessAI.Application.WorkoutsCalendar.Queries.GetWorkoutsCalendar
-@model IEnumerable<WorkoutCalendarDto>
+@model FitnessAI.Application.WorkoutsCalendar.Queries.GetWorkoutsCalendar.WorkoutCalendarViewModel
 
 @{
     ViewBag.Title = "Kalendarz treningów";
 }
 
-<h2>@Model</h2>
+<div class="container text-center mb-3">
+    <div class="d-flex justify-content-around align-items-center">
+        <div>
+            <a
+                asp-controller="WorkoutCalendar"
+                asp-action="WorkoutsCalendar"
+                asp-route-date="@Model.PreviousDate.ToString("yyyy-MM-dd")"
+                class="btn btn-primary"
+                role="button">
+                <i class="fas fa-solid fa-backward me-2"></i>Poprzedni
+            </a>
+        </div>
+        <div>
+            <div class="form-check form-switch m-2">
+                @Model.SelectedDate.ToString("yyyy-MM-dd")
+            </div>
+        </div>
+        <div>
+            <a
+                asp-controller="WorkoutCalendar"
+                asp-action="WorkoutsCalendar"
+                asp-route-date="@Model.NextDate.ToString("yyyy-MM-dd")"
+                class="btn btn-primary"
+                role="button">
+                Następny<i class="fas fa-solid fa-forward ms-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="border p-3 bg-white">
+        <div class="bg-white border p-3 text-center">
+            <h3 id="training" class="mb-3">Brak treningu w wybranym dniu</h3>
+
+            <select id="trainingSelect">
+                <option value="Brak treningu w wybranym dniu">Wybierz trening</option>
+                <option value="Trening Aaa">Trening A</option>
+                <option value="Trening Bbb">Trening B</option>
+                <option value="Trening Ccc">Trening C</option>
+            </select>
+        </div>
+
+        <div class="bg-white border mt-3 p-3">
+            <h3 class="mb-3 text-center">Lista ćwiczeń</h3>
+            <p>Lista ćwiczeń</p>
+        </div>
+
+        <div class="text-center mt-3">
+            <a
+                href="#"
+                data-toggle="modal"
+                data-target="#addWorkoutModal"
+                role="button"
+                class="btn btn-primary">
+                <i class="fas fa-solid fa-circle-plus me-2"></i>
+                Zatwierdź trening
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+       $(document).ready(function(){
+           $('#trainingSelect').change(function(){
+               let selectedTraining = $(this).val();
+               $('#training').text(selectedTraining);
+           });
+       });
+   </script>
+}
