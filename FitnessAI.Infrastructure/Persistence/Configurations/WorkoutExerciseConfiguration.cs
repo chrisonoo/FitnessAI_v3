@@ -18,9 +18,9 @@ public class WorkoutExerciseConfiguration: IEntityTypeConfiguration<WorkoutExerc
             .OnDelete(DeleteBehavior.Restrict);
         
         builder
-            .HasOne(x => x.Exercise)
+            .HasOne(x => x.UserExercise)
             .WithMany(x => x.WorkoutExercises)
-            .HasForeignKey(x => x.ExerciseId)
+            .HasForeignKey(x => x.UserExerciseId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

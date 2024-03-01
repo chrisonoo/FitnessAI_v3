@@ -15,10 +15,10 @@ public class WorkoutCalendarExercise
     public WorkoutCalendar WorkoutCalendar { get; set; }
 
     [Required]
-    [ForeignKey(nameof(Exercise))]
-    public int ExerciseId { get; set; }
+    [ForeignKey(nameof(UserExercise))]
+    public int UserExerciseId { get; set; }
 
-    public Exercise Exercise { get; set; }
+    public UserExercise UserExercise { get; set; }
 
     [Required]
     public string WorkoutLoad { get; set; }

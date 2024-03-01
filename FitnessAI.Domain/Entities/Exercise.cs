@@ -24,6 +24,4 @@ public class Exercise
     public bool IsActive { get; set; }
     
     public ICollection<UserExercise> UserExercises { get; set; } = new HashSet<UserExercise>();
-    public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new HashSet<WorkoutExercise>();
-    public ICollection<WorkoutCalendarExercise> WorkoutCalendarExercises { get; set; } = new HashSet<WorkoutCalendarExercise>();
 }

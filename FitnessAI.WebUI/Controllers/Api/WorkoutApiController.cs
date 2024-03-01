@@ -29,15 +29,15 @@ public class WorkoutApiController: BaseApiController
             .Where(ue => ue.UserId == currentUser.Id)
             .ToListAsync();
         var workoutExercises = Context.WorkoutExercises
-            .Include(we => we.Exercise)
+            .Include(we => we.UserExercise)
             .Where(we => we.WorkoutId == workoutId)
             .Select(we => new ApiWorkoutExerciseDto
             {
                 Id = we.Id,
                 WorkoutId = we.WorkoutId,
-                ExerciseId = we.ExerciseId,
-                ExerciseTitle = we.Exercise.Title,
-                ExerciseCategory = we.Exercise.Category
+                ExerciseId = we.UserExerciseId,
+                ExerciseTitle = we.UserExercise.Title,
+                ExerciseCategory = we.UserExercise.Category
             })
             .OrderBy(we => we.ExerciseCategory)
             .ThenBy(we => we.ExerciseTitle);
@@ -70,14 +70,14 @@ public class WorkoutApiController: BaseApiController
             var workoutExercise = new WorkoutExercise
             {
                 WorkoutId = changeExerciseAssigment.WorkoutId,
-                ExerciseId = changeExerciseAssigment.ExerciseId
+                UserExerciseId = changeExerciseAssigment.ExerciseId
             };
             await Context.WorkoutExercises.AddAsync(workoutExercise);
         }
         else
         {
             var workoutExercise = await Context.WorkoutExercises
-                .FirstOrDefaultAsync(we => we.WorkoutId == changeExerciseAssigment.WorkoutId && we.ExerciseId == changeExerciseAssigment.ExerciseId);
+                .FirstOrDefaultAsync(we => we.WorkoutId == changeExerciseAssigment.WorkoutId && we.UserExerciseId == changeExerciseAssigment.ExerciseId);
             if (workoutExercise is not null)
                 Context.WorkoutExercises.Remove(workoutExercise);
         }

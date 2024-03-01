@@ -32,19 +32,35 @@ public class ExerciseApiController : BaseApiController
         var currentUser = await SignInManager.UserManager.FindByNameAsync(updateUserExercisesSelection.Username);
         var userExercise = await Context.UserExercises
             .FirstOrDefaultAsync(ue => ue.ExerciseId == updateUserExercisesSelection.ExerciseId && ue.UserId == currentUser.Id);
+        var selectedExercise = await Context.Exercises.FindAsync(updateUserExercisesSelection.ExerciseId);
         
         if (userExercise is null)
         {
             var newUserExercise = new UserExercise
             {
                 ExerciseId = updateUserExercisesSelection.ExerciseId,
-                UserId = currentUser.Id
+                UserId = currentUser.Id,
+                Title = selectedExercise!.Title,
+                Category = selectedExercise.Category,
+                Description = selectedExercise.Description,
+                WorkoutInstruction = selectedExercise.WorkoutInstruction,
+                BeginnerLoad = selectedExercise.BeginnerLoad,
+                IntermediateLoad = selectedExercise.IntermediateLoad,
+                AdvancedLoad = selectedExercise.AdvancedLoad,
+                ImageUrl = selectedExercise.ImageUrl,
+                MultimediaUrl = selectedExercise.MultimediaUrl,
+                CreatedDate = DateTimeService.Now,
+                IsActive = true
             };
             await Context.UserExercises.AddAsync(newUserExercise);
         }
+        else if (!userExercise.IsActive)
+        {
+            userExercise.IsActive = true;
+        }
         else
         {
-            Context.UserExercises.Remove(userExercise);
+            userExercise.IsActive = false;
         }
         
         await Context.SaveChangesAsync();
