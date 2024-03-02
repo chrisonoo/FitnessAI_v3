@@ -1,6 +1,5 @@
 using FitnessAI.Application.Dictionaries;
-using FitnessAI.Application.Exercises.Queries.GetExerciseDetails;
-using FitnessAI.Application.Exercises.Queries.GetExercises;
+using FitnessAI.Application.UserExercises.Queries.GetUserExerciseDetails;
 using FitnessAI.Application.UserExercises.Queries.GetUserExercises;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +21,9 @@ public class UserExerciseController : BaseController
     
     public async Task<IActionResult> UserExerciseDetails(string id)
     {
-        var exerciseDetailsViewModel = await Mediator.Send(new GetExerciseDetailsQuery
+        var exerciseDetailsViewModel = await Mediator.Send(new GetUserExerciseDetailsQuery
         {
-            ExerciseId = int.Parse(id),
+            UserExerciseId = int.Parse(id),
             ActiveUserId = LoggedUserId
         });
 

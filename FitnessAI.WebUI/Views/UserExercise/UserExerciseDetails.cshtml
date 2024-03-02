@@ -1,42 +1,46 @@
-@model FitnessAI.Application.Exercises.Queries.GetExerciseDetails.ExerciseDetailsViewModel
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model FitnessAI.Application.UserExercises.Queries.GetUserExerciseDetails.UserExerciseDetailsViewModel
 
 @{
-    ViewData["Title"] = "Opis ćwiczenia - " + Model.Exercise.Title;
+    ViewData["Title"] = "Opis ćwiczenia - " + Model.UserExercise.Title;
 }
 
 <div class="container text-center mb-3">
     <div class="d-flex justify-content-around align-items-center">
         <div>
             <a
-                asp-controller="Exercise"
-                asp-action="ExerciseDetails"
-                asp-route-id="@Model.PreviousExerciseId"
+                asp-controller="UserExercise"
+                asp-action="UserExerciseDetails"
+                asp-route-id="@Model.PreviousUserExerciseId"
                 class="btn btn-primary"
                 role="button">
                 <i class="fas fa-solid fa-backward me-2"></i>Poprzednie
             </a>
         </div>
         <div>
-            <div class="form-check form-switch m-2">
-                <input
-                    id="active-@Model.Exercise.Id"
-                    class="form-check-input active-exercise-check"
-                    type="checkbox" role="switch"
-                    autocomplete="off"
-                    data-exercise-id="@Model.Exercise.Id"
-                    @(Model.IsSelectedForActiveUser ? "checked" : "")>
-                <label
-                    for="active-@Model.Exercise.Id"
-                    class="form-check-label">
-                    Dodaj do listy <b>Moich Ćwiczeń</b>
-                </label>
-            </div>
+            <a
+                asp-controller="UserExercise"
+                asp-action="UserExerciseDetails"
+                asp-route-id="@Model.PreviousUserExerciseId"
+                class="btn btn-success"
+                role="button">
+                <i class="fas fa-solid fa-pen-to-square me-2"></i>Edytuj
+            </a>
+
+            <a
+                asp-controller="UserExercise"
+                asp-action="UserExerciseDetails"
+                asp-route-id="@Model.NextUserExerciseId"
+                class="btn btn-danger"
+                role="button">
+                <i class="fas fa-solid fa-trash-can me-2"></i>Usuń
+            </a>
         </div>
         <div>
             <a
-                asp-controller="Exercise"
-                asp-action="ExerciseDetails"
-                asp-route-id="@Model.NextExerciseId"
+                asp-controller="UserExercise"
+                asp-action="UserExerciseDetails"
+                asp-route-id="@Model.NextUserExerciseId"
                 class="btn btn-primary"
                 role="button">
                 Następne<i class="fas fa-solid fa-forward ms-2"></i>
@@ -47,23 +51,23 @@
 
 <div class="container">
     <div class="card mb-3">
-        <img src="@Model.Exercise.ImageUrl" class="card-img-top" style="height: 400px; width: 100%; object-fit: cover; object-position: top" alt="...">
+        <img src="@Model.UserExercise.ImageUrl" class="card-img-top" style="height: 400px; width: 100%; object-fit: cover; object-position: top" alt="...">
         <div class="card-body">
-            <h3 class="card-title">@Model.Exercise.Title</h3>
-            <h5 class="card-title">Kategoria: @Model.Exercise.Category</h5>
-            <p class="card-text">@Model.Exercise.Description</p>
+            <h3 class="card-title">@Model.UserExercise.Title</h3>
+            <h5 class="card-title">Kategoria: @Model.UserExercise.Category</h5>
+            <p class="card-text">@Model.UserExercise.Description</p>
             <h5 class="card-title">Jak poprawnie wykonać ćwiczenie?</h5>
-            <p id="instructionElement" class="card-text">@Model.Exercise.WorkoutInstruction</p>
-            <h5 class="card-title">Dostosuj ćwiczenie do swoich możliwości: @Model.Exercise.Category</h5>
+            <p id="instructionElement" class="card-text">@Model.UserExercise.WorkoutInstruction</p>
+            <h5 class="card-title">Dostosuj ćwiczenie do swoich możliwości: @Model.UserExercise.Category</h5>
             <ul>
                 <li>
-                    <b>Początkujący:</b> @Model.Exercise.BeginnerLoad
+                    <b>Początkujący:</b> @Model.UserExercise.BeginnerLoad
                 </li>
                 <li>
-                    <b>Średnio-zaawansowany:</b> @Model.Exercise.IntermediateLoad
+                    <b>Średnio-zaawansowany:</b> @Model.UserExercise.IntermediateLoad
                 </li>
                 <li>
-                    <b>Zaawansowany:</b> @Model.Exercise.AdvancedLoad
+                    <b>Zaawansowany:</b> @Model.UserExercise.AdvancedLoad
                 </li>
             </ul>
         </div>
@@ -72,36 +76,35 @@
 
 @section Scripts{
     <script>
-        $(document).ready(function (){
-            let instructionElement = $('#instructionElement');
-            instructionElement.html(insertBreaks(instructionElement.html()));
-             
-            $('.active-exercise-check').change(function () {
-                let userName = '@Model.ActiveUserName';
-                let exerciseId = $(this).data('exercise-id');
-        
-                let data = {
-                    userName, 
-                    exerciseId
-                };
-        
-                $.ajax({
-                    url: '/api/exerciseapi/updateuserexerciseselection',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    data: JSON.stringify(data),
-                    success(response) {
-                       console.log(response);
-                    },
-                    error(error) {
-                       console.log(error);
-                    }
-                });
-                 
-            });
-        });
-     
+        // $(document).ready(function (){
+        //     let instructionElement = $('#instructionElement');
+        //     instructionElement.html(insertBreaks(instructionElement.html()));
+        //     
+        //     $('.active-exercise-check').change(function () {
+        //         let exerciseId = $(this).data('exercise-id');
+        //
+        //         let data = {
+        //             userName, 
+        //             exerciseId
+        //         };
+        //
+        //         $.ajax({
+        //             url: '/api/exerciseapi/updateuserexerciseselection',
+        //             type: 'POST',
+        //             contentType: 'application/json',
+        //             dataType: 'json',
+        //             data: JSON.stringify(data),
+        //             success(response) {
+        //                console.log(response);
+        //             },
+        //             error(error) {
+        //                console.log(error);
+        //             }
+        //         });
+        //         
+        //     });
+        // });
+
         function insertBreaks(input) {
             let regex = /(\d+\.)/g;
             return input.replace(regex, '<br>$1').substring(4);
