@@ -19,9 +19,10 @@ public class SetWorkoutAsDoneCommandHandler : IRequestHandler<SetWorkoutAsDoneCo
         var workoutCalendar = await _context.WorkoutCalendars
             .Include(x => x.WorkoutCalendarExercises)
             .Where(x => x.UserId == request.UserId)
+            .Where(x => x.IsActive)
             .FirstOrDefaultAsync(x => x.Date == DateTime.Parse(request.WorkoutDate), cancellationToken);
 
-        if (workoutCalendar != null) return Unit.Value;
+        if (workoutCalendar != null || request.WorkoutId == null) return Unit.Value;
 
         var workout = await _context.Workouts
             .Include(x => x.WorkoutExercises)
@@ -36,27 +37,25 @@ public class SetWorkoutAsDoneCommandHandler : IRequestHandler<SetWorkoutAsDoneCo
         };
         _context.WorkoutCalendars.Add(workoutCalendar);
         await _context.SaveChangesAsync(cancellationToken);
-
-        // var workoutCalendarExercise = workoutCalendar.WorkoutCalendarExercises
-        //     .Where(x => x.WorkoutId == request.WorkoutId)
-        //     .FirstOrDefault();
-        //
-        // if (workoutCalendarExercise == null)
-        // {
-        //     workoutCalendarExercise = new WorkoutCalendarExercise
-        //     {
-        //         WorkoutId = request.WorkoutId,
-        //         WorkoutCalendarId = workoutCalendar.Id,
-        //         IsDone = true
-        //     };
-        //     _context.WorkoutCalendarExercises.Add(workoutCalendarExercise);
-        // }
-        // else
-        // {
-        //     workoutCalendarExercise.IsDone = !workoutCalendarExercise.IsDone;
-        // }
-
-
+        
+        foreach (var workoutExercise in workout.WorkoutExercises)
+        {
+            var beginnerLoad = (await _context.UserExercises
+                .Where(x => x.Id == workoutExercise.UserExerciseId)
+                .FirstOrDefaultAsync(cancellationToken))
+                .BeginnerLoad;
+            
+            var workoutCalendarExercise = new WorkoutCalendarExercise
+            {
+                WorkoutCalendarId = workoutCalendar.Id,
+                UserExerciseId = workoutExercise.UserExerciseId,
+                WorkoutLoad = beginnerLoad,
+                IsActive = true
+            };
+            _context.WorkoutCalendarExercises.Add(workoutCalendarExercise);
+        }
+        await _context.SaveChangesAsync(cancellationToken);
+        
         return Unit.Value;
     }
 }

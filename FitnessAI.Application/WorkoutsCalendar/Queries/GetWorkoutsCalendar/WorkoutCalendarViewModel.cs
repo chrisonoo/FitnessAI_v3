@@ -10,7 +10,4 @@ public class WorkoutCalendarViewModel
     public DateTime PreviousDate { get; set; }
     public IEnumerable<WorkoutDto> Workouts { get; set; }
     public WorkoutCalendar WorkoutCalendar { get; set; }
-
-    // potrzebuję ćwiczeń, które są przypisane do treningu razem z informacją o zaawansowaniu użytkownika
-    // poziom ćwiczeń można ustalić po wypełnieniu ankiety i odpytaniu sztucznej inteligencji
 }

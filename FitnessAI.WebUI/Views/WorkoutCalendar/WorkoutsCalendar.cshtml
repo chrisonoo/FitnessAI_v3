@@ -64,7 +64,15 @@
 
         <div class="bg-white border mt-3 p-3">
             <h3 class="mb-3 text-center">Lista ćwiczeń</h3>
-            <p>Lista ćwiczeń</p>
+            <table
+                id="workout-exercises-table"
+                class="table table-hover">
+                <tr>
+                    <td>
+                        Lista ćwiczeń na dziś jest pusta
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div class="text-center mt-3">
@@ -110,7 +118,39 @@
                
                $('#workout-title').text(selectedWorkout);
                $('input[name="workoutId"]').val(selectedWorkoutId);
+               showExercises(selectedWorkoutId);
            });
        });
+       
+    function showExercises(workoutId) {
+        getExercises(workoutId)
+            .then(data => {
+                let workoutExercisesTable = $('#workout-exercises-table');
+                workoutExercisesTable.html(renderWorkoutExercises(data.workout_exercises));
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    
+    function getExercises(workoutId) {
+        return new Promise((resolve, reject) => 
+            $.ajax({
+                url: '/api/workoutapi/exercisesforworkout/' + workoutId, 
+                type: 'GET', 
+                success: resolve, 
+                error: reject
+            })
+        );
+    }
+    
+    function renderWorkoutExercises(exercises) {
+        let html = '';
+        for (let exercise of exercises) {
+            html += `<tr>
+                    <td style="width: 55%">${exercise.exerciseTitle}</td>
+                    <td style="width: 30%">${exercise.exerciseCategory}</td>
+                </tr>`;
+        }
+        return html;
+    }
    </script>
 }

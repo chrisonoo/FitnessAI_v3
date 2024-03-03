@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FitnessAI.Domain.Entities;
 
-public class WorkoutCalendarExercise
+public class  WorkoutCalendarExercise
 {
     [Key]
     public int Id { get; set; }
