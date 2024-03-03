@@ -35,5 +35,5 @@ public class ApiCurrentUserDetailsViewModel
     public string AccountType { get; set; } = default!;
     
     public string FullName => $"{FirstName} {LastName}";
-    public string FullAddress => $"{Country}, {ZipCode} {City}, {Street} {StreetNumber}";
+    public string FullAddress => $"{Country}, {ZipCode} {City}\n{Street} {StreetNumber}";
 }
