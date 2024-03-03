@@ -67,11 +67,38 @@
             <table
                 id="workout-exercises-table"
                 class="table table-hover">
-                <tr>
-                    <td>
-                        Lista ćwiczeń na dziś jest pusta
-                    </td>
-                </tr>
+                @if (@Model.WorkoutCalendar != null)
+                {
+                    <thead>
+                        <tr>
+                            <th scope="col">Ćwiczenie</th>
+                            <th scope="col" style="width: 12%">Kategoria</th>
+                            <th scope="col" style="width: 12%">Początkujący</th>
+                            <th scope="col" style="width: 12%">Średni</th>
+                            <th scope="col" style="width: 12%">Zaawansowany</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var exercise in Model.WorkoutCalendar.WorkoutCalendarExercises)
+                        {
+                            <tr>
+                                <td>@exercise.UserExercise.Title</td>
+                                <td>@exercise.UserExercise.Category</td>
+                                <td>@exercise.UserExercise.BeginnerLoad</td>
+                                <td>@exercise.UserExercise.IntermediateLoad</td>
+                                <td>@exercise.UserExercise.AdvancedLoad</td>
+                            </tr>
+                        }
+                    </tbody>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            Lista ćwiczeń na dziś jest pusta
+                        </td>
+                    </tr>
+                }
             </table>
         </div>
 

@@ -35,6 +35,7 @@ public class GetWorkoutsCalendarQueryHandler : IRequestHandler<GetWorkoutsCalend
                 .ToListAsync(cancellationToken: cancellationToken),
             WorkoutCalendar = await _context.WorkoutCalendars
                 .Include(x => x.WorkoutCalendarExercises)
+                .ThenInclude(x => x.UserExercise)
                 .AsNoTracking()
                 .Where(x => x.IsActive == true)
                 .Where(x => x.UserId == request.UserId)
