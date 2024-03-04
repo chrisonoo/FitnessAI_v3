@@ -9,21 +9,168 @@
     <ContentPage.Content>
 
         <Grid
-            RowDefinitions="5,Auto,*,Auto"
+            RowDefinitions="10,Auto,Auto,*,Auto"
             RowSpacing="0">
 
             <Grid
                 Grid.Row="1"
-                ColumnDefinitions="Auto,*,Auto">
-                
-                <Label
+                ColumnDefinitions="5,Auto,*,Auto,5">
+
+                <Button
                     Grid.Column="1"
-                    x:Name="DateLabel"
-                    FontSize="Large"/>
+                    x:Name="PreviousDateButton"
+                    FontSize="Default"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    TextColor="Black"
+                    Clicked="BtnSelectNewDay_OnClicked" />
+                <Label
+                    Grid.Column="2"
+                    x:Name="SelectedDateLabel"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Column="3"
+                    x:Name="NextDateButton"
+                    FontSize="Default"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    TextColor="Black"
+                    Clicked="BtnSelectNewDay_OnClicked" />
             </Grid>
-            
-            
-            
+
+            <Label
+                Grid.Row="2"
+                x:Name="WorkoutCalendarTitleLabel"
+                FontSize="Default"
+                Margin="10,20,10,20"
+                TextColor="White"
+                BackgroundColor="#314fa8"
+                Padding="10,10"
+                HorizontalOptions="Fill"
+                VerticalOptions="Start" />
+
+            <CollectionView
+                Grid.Row="3"
+                x:Name="WorkoutCalendarExercisesCollectionView">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="local:ApiWorkoutCalendarExerciseDto">
+                        <Border
+                            Margin="10,0,10,5">
+                            <Grid
+                                RowDefinitions="Auto,Auto,Auto,Auto"
+                                RowSpacing="5">
+                                <Label
+                                    Grid.Row="0"
+                                    TextColor="White"
+                                    BackgroundColor="#314fa8"
+                                    Padding="10,5"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Start"
+                                    Text="{Binding Title}" />
+
+                                <HorizontalStackLayout
+                                    Grid.Row="1"
+                                    Margin="10,10,0,0">
+                                    <Label
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="Początkujący:" />
+                                    <Label
+                                        Margin="20,0,0,0"
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding BeginnerLoad}" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout
+                                    Grid.Row="2"
+                                    Margin="10,0,0,0">
+                                    <Label
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="Średnio-zaawansowany:" />
+                                    <Label
+                                        Margin="20,0,0,0"
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding IntermediateLoad}" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout
+                                    Grid.Row="3"
+                                    Margin="10,0,0,10">
+                                    <Label
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="Zaawansowany:" />
+                                    <Label
+                                        Margin="20,0,0,0"
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding AdvancedLoad}" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Grid
+                Grid.Row="3"
+                RowDefinitions="Auto, *"
+                x:Name="WorkoutCalendarSelectNewWorkout">
+
+                <Label
+                    Grid.Row="0"
+                    Text="Dodaj dzisiejszy trening"
+                    Margin="0,0,0,20"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+
+                <CollectionView
+                    Grid.Row="1"
+                    x:Name="WorkoutsList">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+                            Orientation="Vertical"
+                            ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="local:ApiWorkoutsDto">
+                            <Button
+                                BackgroundColor="#314fa8"
+                                Margin="30,5"
+                                x:Name="AddTodayWorkoutButton"
+                                Text="{Binding Title}"
+                                Clicked="AddTodayWorkoutButton_OnClicked" 
+                                CommandParameter="{Binding Id}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <Button
+                Grid.Row="4"
+                BackgroundColor="#314fa8"
+                Margin="70,20"
+                x:Name="DeleteTodayWorkoutButton"
+                Text="✖  Usuń dzisiejszy trening"
+                Clicked="DeleteTodayWorkoutButton_OnClicked" />
+            <Button
+                Grid.Row="4"
+                BackgroundColor="#314fa8"
+                Margin="70,20"
+                x:Name="AddTodayWorkoutButton"
+                Text="✔  Zatwierdź dzisiejszy trening"
+                Clicked="AddTodayWorkoutButton_OnClicked" />
         </Grid>
 
     </ContentPage.Content>
