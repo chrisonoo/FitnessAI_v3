@@ -13,6 +13,10 @@ public partial class WorkoutPage
     {
         base.OnAppearing();
         await LoadDataAsync();
+
+        var today = DateTime.Now;
+        
+        DateLabel.Text = DateTime.Now.ToString("dd-MM-yyyy");
     }
 
     private async Task LoadDataAsync()

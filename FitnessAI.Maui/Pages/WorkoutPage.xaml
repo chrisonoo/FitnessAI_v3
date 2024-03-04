@@ -5,14 +5,26 @@
              xmlns:local="clr-namespace:FitnessAI.Maui.Models"
              x:DataType="local:ApiWorkoutsViewModel"
              x:Class="FitnessAI.Maui.Pages.WorkoutPage">
-    
+
     <ContentPage.Content>
-        
-            <Label 
-                Text="{Binding TestString}" 
-                FontSize="Large"
-                HorizontalOptions="Center" 
-                VerticalOptions="CenterAndExpand" />
-        
+
+        <Grid
+            RowDefinitions="5,Auto,*,Auto"
+            RowSpacing="0">
+
+            <Grid
+                Grid.Row="1"
+                ColumnDefinitions="Auto,*,Auto">
+                
+                <Label
+                    Grid.Column="1"
+                    x:Name="DateLabel"
+                    FontSize="Large"/>
+            </Grid>
+            
+            
+            
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>
