@@ -5,7 +5,6 @@ using FitnessAI.Infrastructure.Identity;
 using FitnessAI.Infrastructure.Pdf;
 using FitnessAI.Infrastructure.Persistence;
 using FitnessAI.Infrastructure.Services;
-using FitnessAI.Infrastructure.SignalR.UserNotification;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -70,9 +69,6 @@ public static class DependencyInjection
         services.AddScoped<IQrCodeGenerator, QrCodeGenerator>();
         services.AddScoped<IPdfFileGenerator, RotativaPdfGenerator>();
         services.AddScoped<IRandomService, RandomService>();
-        services.AddSignalR();
-        services.AddSingleton<IUserNotificationService, UserNotificationService>();
-        services.AddSingleton<IUserConnectionManager, UserConnectionManager>();
         
         return services;
     }

@@ -43,6 +43,7 @@
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Views\Test\Test2.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\microsoft-signalr\signalr.min.js" />
     </ItemGroup>
 
 </Project>

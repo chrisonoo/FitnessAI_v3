@@ -4,7 +4,6 @@ using DotNetEnv;
 using FitnessAI.Application;
 using FitnessAI.Application.Common.Interfaces;
 using FitnessAI.Infrastructure;
-using FitnessAI.Infrastructure.SignalR.UserNotification;
 using FitnessAI.WebUI.Extensions;
 using FitnessAI.WebUI.Middlewares;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -86,8 +85,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     "default",
     "{controller=Home}/{action=Index}/{id?}");
-
-app.MapHub<NotificationUserHub>("/NotificationUserHub");
 
 app.MapRazorPages();
 
