@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using FitnessAI.Application.Common.Interfaces;
+﻿using FitnessAI.Application.Common.Interfaces;
 using FitnessAI.Domain.Entities;
 using FitnessAI.Infrastructure.Encryption;
 using FitnessAI.Infrastructure.Identity;
@@ -71,7 +70,6 @@ public static class DependencyInjection
         services.AddScoped<IQrCodeGenerator, QrCodeGenerator>();
         services.AddScoped<IPdfFileGenerator, RotativaPdfGenerator>();
         services.AddScoped<IRandomService, RandomService>();
-        services.AddScoped<IJwtService, JwtService>();
         services.AddSignalR();
         services.AddSingleton<IUserNotificationService, UserNotificationService>();
         services.AddSingleton<IUserConnectionManager, UserConnectionManager>();
