@@ -1,6 +1,5 @@
 ﻿using FitnessAI.Application.Common.Interfaces;
 using FitnessAI.Domain.Entities;
-using FitnessAI.Infrastructure.Encryption;
 using FitnessAI.Infrastructure.Identity;
 using FitnessAI.Infrastructure.Pdf;
 using FitnessAI.Infrastructure.Persistence;
@@ -21,11 +20,6 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var encryptionService = new EncryptionService(new KeyInfo("kk3zd3HAIZjiZnDUhuU9OMASs4eljyPBZ1WbFdgC3UE=",
-            "4ITbLvvo3BWGObJRFH4wDg=="));
-
-        services.AddSingleton<IEncryptionService>(encryptionService);
-
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
         // Move connection string to .env file
