@@ -41,4 +41,8 @@
         </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Test\Test2.cshtml" />
+    </ItemGroup>
+
 </Project>
