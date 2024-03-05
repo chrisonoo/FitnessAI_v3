@@ -1,9 +1,7 @@
 ﻿using System.Reflection;
-using FitnessAI.Application.Common.Events;
 using FitnessAI.Application.Common.Interfaces;
 using FitnessAI.Domain.Entities;
 using FitnessAI.Infrastructure.Encryption;
-using FitnessAI.Infrastructure.Events;
 using FitnessAI.Infrastructure.Identity;
 using FitnessAI.Infrastructure.Pdf;
 using FitnessAI.Infrastructure.Persistence;
@@ -77,27 +75,8 @@ public static class DependencyInjection
         services.AddSignalR();
         services.AddSingleton<IUserNotificationService, UserNotificationService>();
         services.AddSingleton<IUserConnectionManager, UserConnectionManager>();
-
-        RegisterEvents(services);
-
+        
         return services;
-    }
-
-    private static void RegisterEvents(IServiceCollection services)
-    {
-        services.AddSingleton<IEventDispatcher, EventDispatcher>();
-
-        var assemblies = Assembly
-            .GetExecutingAssembly()
-            .GetReferencedAssemblies()
-            .Select(Assembly.Load)
-            .ToList();
-
-        services
-            .Scan(x => x.FromAssemblies(assemblies)
-                .AddClasses(r => r.AssignableTo(typeof(IEventHandler<>)))
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
     }
 
     public static IApplicationBuilder UseInfrastructure(
