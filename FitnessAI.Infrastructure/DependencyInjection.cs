@@ -58,7 +58,6 @@ public static class DependencyInjection
         services.AddSingleton<IAppSettingsService, AppSettingsService>();
         services.AddHttpContextAccessor();
         services.AddSingleton<ICurrentUserService, CurrentUserService>();
-        services.AddSingleton<IHttpContext, MyHttpContext>();
         services.AddSingleton<IFileManagerService, FileManagerService>();
         services.AddScoped<IQrCodeGenerator, QrCodeGenerator>();
         services.AddScoped<IPdfFileGenerator, RotativaPdfGenerator>();

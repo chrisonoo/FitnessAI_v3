@@ -100,13 +100,13 @@
             </a>
         </li>
 
-        @* <!-- Nav Item --> *@
-        @* <li class="nav-item @Url.MakeActiveClass("Calendar", "Calendar")"> *@
-        @*     <a asp-controller="Calendar" asp-action="Calendar" class="nav-link"> *@
-        @*         <i class="fas fa-regular fa-calendar-days"></i> *@
-        @*         <span>Grafik</span> *@
-        @*     </a> *@
-        @* </li> *@
+        <!-- Nav Item -->
+        <li class="nav-item @Url.MakeActiveClass("Calendar", "Calendar")">
+            <a asp-controller="Calendar" asp-action="Calendar" class="nav-link">
+                <i class="fas fa-regular fa-calendar-days"></i>
+                <span>Grafik</span>
+            </a>
+        </li>
     }
 
     @if (User.IsInRole(RolesDict.ADMINISTRATOR))
@@ -146,7 +146,6 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Wspólne:</h6>
                     <a asp-controller="Settings" asp-action="Settings" class="collapse-item">Aplikacja</a>
-                    <a asp-controller="Settings" asp-action="Test" class="collapse-item">Test</a>
                 </div>
             </div>
         </li>
