@@ -123,9 +123,9 @@
         </value>
     </resheader>
     <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
+    <value>Kontakt</value>
   </data>
     <data name="PrivacyPolicy" xml:space="preserve">
-    <value>Privacy Policy</value>
+    <value>Polityka prywatności</value>
   </data>
 </root>

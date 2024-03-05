@@ -123,12 +123,12 @@
         </value>
     </resheader>
     <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Logowanie</value>
   </data>
     <data name="MyAccount" xml:space="preserve">
-    <value>My account</value>
+    <value>Moje konto</value>
   </data>
     <data name="Registration" xml:space="preserve">
-    <value>Registration</value>
+    <value>Rejestracja</value>
   </data>
 </root>
